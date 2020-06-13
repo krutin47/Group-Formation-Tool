@@ -4,6 +4,7 @@ import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.Courses.*;
+import CSCI5308.GroupFormationTool.Question.*;
 
 /*
  * This is a singleton, we will learn about these when we learn design patterns.
@@ -23,6 +24,7 @@ public class SystemConfig
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
+	private IQuestionPersistence questionDB;
 	
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
@@ -36,6 +38,7 @@ public class SystemConfig
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
+		questionDB=new QuestionDB();
 	}
 	
 	// This is the way the rest of the application gets access to the System object.
@@ -59,13 +62,16 @@ public class SystemConfig
 	{
 		this.passwordEncryption = passwordEncryption;
 	}
-	
+
+
 	public IUserPersistence getUserDB()
 	{
+
 		return userDB;
 	}
 	
 	public void setUserDB(IUserPersistence userDB)
+
 	{
 		this.userDB = userDB;
 	}
@@ -79,24 +85,39 @@ public class SystemConfig
 	{
 		this.databaseConfiguration = databaseConfiguration;
 	}
-	
+
+
 	public void setCourseDB(ICoursePersistence courseDB)
 	{
 		this.courseDB = courseDB;
 	}
-	
+
+
 	public ICoursePersistence getCourseDB()
 	{
 		return courseDB;
 	}
-	
+
+
 	public void setCourseUserRelationshipDB(ICourseUserRelationshipPersistence courseUserRelationshipDB)
 	{
 		this.courseUserRelationshipDB = courseUserRelationshipDB;
 	}
-	
+
+
 	public ICourseUserRelationshipPersistence getCourseUserRelationshipDB()
 	{
 		return courseUserRelationshipDB;
+	}
+
+	public void setQuestionDB(IQuestionPersistence questionDB)
+	{
+		this.questionDB=questionDB;
+
+	}
+
+	public IQuestionPersistence getQuestionDB()
+	{
+		return questionDB;
 	}
 }
