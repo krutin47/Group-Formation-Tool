@@ -1,13 +1,16 @@
 package CSCI5308.GroupFormationTool.Question;
 
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import static CSCI5308.GroupFormationTool.AccessControl.User.isStringNullOrEmpty;
 
 public class Question
 {
-    private long id;
-    private String title;
-    private String text;
-    private ITypeQuestion typedecider;
+    private long questionID;
+    private String questionTitle;
+    private String questionText;
+    private long typeID;
 
     //default constructor
     public Question()
@@ -26,10 +29,10 @@ public class Question
    //set default values
     public void setDefaults()
     {
-        id = -1;
-        title = "";
-        text="";
-        typedecider=new QuestionType();
+        questionID = -1;
+        questionTitle = "";
+        questionText="";
+        typeID=-1;
     }
 
 
@@ -37,15 +40,42 @@ public class Question
     //TO DELETE AN EXISTING QUESTION based on questionID
     public boolean delete(IQuestionPersistence questionDB)
     {
-        return questionDB.deleteQuestion(id);
+        return questionDB.deleteQuestion(questionID);
     }
 
 
 
     //TO CREATE A NEW QUESTION
-    public boolean createCourse(IQuestionPersistence questionDB)
+    public boolean createQuestion(IQuestionPersistence questionDB)
     {
         return questionDB.createQuestion(this);
+    }
+
+
+    //Validations
+
+    public static boolean isTitlevalid(String title)
+    {
+        if (null == title)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static boolean isTextvalid(String text)
+    {
+        if (null == text)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 
@@ -53,32 +83,42 @@ public class Question
     //Getters and Setters
     public void setId(long id)
     {
-        this.id = id;
+        this.questionID = id;
     }
 
     public long getId()
     {
-        return id;
+        return questionID;
     }
 
     public void setTitle(String title)
     {
-        this.title = title;
+        this.questionTitle = title;
     }
 
     public String getTitle()
     {
-        return title;
+        return questionTitle;
     }
 
     public void setText(String text)
     {
-        this.text = text;
+        this.questionText = text;
     }
 
     public String getText()
     {
-        return text;
+        return questionText;
+    }
+
+    public long getTypeID()
+    {
+       return typeID;
+    }
+
+    public void setTypeID(long id)
+    {
+        this.typeID=id;
     }
 
 
