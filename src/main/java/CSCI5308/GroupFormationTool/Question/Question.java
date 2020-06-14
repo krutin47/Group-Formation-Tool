@@ -1,10 +1,6 @@
 package CSCI5308.GroupFormationTool.Question;
 
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-import static CSCI5308.GroupFormationTool.AccessControl.User.isStringNullOrEmpty;
-
 public class Question
 {
     private long questionID;
