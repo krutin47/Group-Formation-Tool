@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.Question;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 
 public class Question
 {
@@ -48,8 +50,9 @@ public class Question
     }
 
 
-    //Validations
 
+
+    //Validations
     public static boolean isTitlevalid(String title)
     {
         if (null == title)

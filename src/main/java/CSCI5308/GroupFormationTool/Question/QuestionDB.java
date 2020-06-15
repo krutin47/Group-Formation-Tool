@@ -56,7 +56,7 @@ public class QuestionDB implements IQuestionPersistence{
         CallStoredProcedure proc = null;
         try
         {
-            proc = new CallStoredProcedure("spFindCourseByID(?)");
+            proc = new CallStoredProcedure("spFindQuestionByID(?)");
             proc.setParameter(1, id);
             ResultSet results = proc.executeWithResults();
             if (null != results)

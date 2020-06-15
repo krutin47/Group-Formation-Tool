@@ -1,16 +1,22 @@
 package CSCI5308.GroupFormationTool.Question;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.Arrays;
 import java.util.List;
 
+@Controller
 public class QuestionController {
+
+
+    @GetMapping("/createquestion")
+    public String questionForm(Model model) {
+        model.addAttribute("question", new Question());
+        return "createquestion";
+    }
 
 
 
@@ -21,7 +27,8 @@ public class QuestionController {
     {
 
           boolean success=false;
-          IQuestionPersistence questionDB=SystemConfig.instance().getQuestionDB();
+
+          IQuestionPersistence questionDB=SystemConfig.instance().getQuestionDB();   //to create the question in DB
           Question q=new Question();
           if(q.isTextvalid(questionText) && (q.isTitlevalid(questionTitle)))  //check if input is right
           {
@@ -35,11 +42,13 @@ public class QuestionController {
               }
           }
 
+
           //Check if question was created
           if(success)
           {
-              ModelAndView mav = new ModelAndView("redirect:/instructor/createquestion/type" + typeID);  //redirect based on type of question
-              return mav;
+              ModelAndView mav = new ModelAndView();
+              mav.setViewName("type"+typeID);       //go to page based on typeID
+              return mav;   //return model and view
           }
 
           else
