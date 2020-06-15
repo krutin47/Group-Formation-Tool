@@ -6,7 +6,7 @@ CREATE PROCEDURE spLoadAllQuestions ()
 BEGIN
 	SELECT questionID, questionTitle, questionText
     FROM Question
-    ORDER BY title ASC;
+    ORDER BY questionID ASC;
 END $$
 
 DELIMITER ;
