@@ -51,6 +51,6 @@ public class QuestionDBMock implements IQuestionPersistence {
         question.setText("Test");
         question.setTypeID(1);
         question.setDefaults();
-        return false;
+        return true;
     }
 }

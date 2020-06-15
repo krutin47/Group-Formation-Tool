@@ -68,7 +68,7 @@ class QuestionTest
     {
         Question question=new Question();
         question.setText("Test");
-        Assert.isTrue(question.getTitle().equals("Test"));
+        Assert.isTrue(question.getText().equals("Test"));
     }
 
 
@@ -97,12 +97,11 @@ class QuestionTest
     }
 
     @Test
-    public void deleteTest()
+    public void deleteQuestionTest()
     {
         IQuestionPersistence questionDB=new QuestionDBMock();
         boolean status=questionDB.deleteQuestion(0);
         Assert.isTrue(status);
-
 
     }
 
