@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Option Page</title>
+</head>
+<body>
+    <div style="margin-top:40px; margin-left: 10px; position:relative;" align="center">
+        <div>
+            <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+        <div>
+            <h4>Answers</h4>
+            <hr>
+            <form role="form" method="post" id="addOptions" th:action="@{/question/addquestionoption}">
+                <table>
+                    <tbody>
+                    </tbody>
+                </table>
+                <p th:text="${Question}"></p>
+                <div><button name="addRow">Another Option</button></div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

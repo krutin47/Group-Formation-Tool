@@ -6,6 +6,7 @@ public class Question {
     private String questionText;
     private String creationDate;
     private String questionType;
+    private String bannerID;
 
     public Question(long questionID, String questionTitle, String questionText, String creationDate) {
         this.questionID = questionID;
@@ -20,6 +21,13 @@ public class Question {
         this.questionText = questionText;
         this.creationDate = creationDate    ;
         this.questionType = questionType;
+    }
+
+    public Question(String questionTitle, String questionText, String questionType, String bannerID) {
+        this.questionTitle = questionTitle;
+        this.questionText = questionText;
+        this.questionType = questionType;
+        this.bannerID = bannerID;
     }
 
     public long getQuestionID() {
@@ -60,5 +68,13 @@ public class Question {
 
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
+    }
+
+    public String getBannerID() {
+        return bannerID;
+    }
+
+    public void setBannerID(String bannerID) {
+        this.bannerID = bannerID;
     }
 }

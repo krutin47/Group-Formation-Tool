@@ -9,31 +9,33 @@
 </head>
 <body>
 <div style="margin-top:40px; margin-left: 10px; position:relative;" align="center">
-    <h1> Enter Question Details </h1>
-    <form th:action="@{/createquestion}" th:object="${question}" method="post">
-
-        <label>Question Title:</label>
-        <input type="text" th:field="*{questionTitle}" th:name="Title"/>
-        <br>
-        <br>
-
-
-        <label>Question Text:</label>
-        <input type="text" th:field="*{questionText}" th:name="Text"/>
-        <br>
-        <br>
-
-
-        <label>Choose a type:</label>
-        <select name="typeID" id="typeID">
-            <option value=1>Numeric</option>
-            <option value=2>Text</option>
-            <option value=3>Multiple Choice, Choose One</option>
-            <option value=4> Multiple Choice, Choose Multiple</option>
-        </select>
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <h4> Enter Question Details </h4>
+    <div style="margin-top:40px; margib-left: 10px; position:relative;" align="center" sec:authorize="isAuthenticated()">
+        <form role="form" method="post" id="addQuestionForm" th:action="@{/question/addquestion}"
+            th:object="${Question}">
+        <p>Question Title: <input type="text" name="questionTitle"required></p>
+        <p>Question Text: <input type="text" name="questionText" required></p>
+        <p>Question Type:
+            <input list="questionType" name="questionTypeList" id="questionTypeDropDown" required>
+            <datalist id="questionType">
+                <option th:each="questionType: ${QuestionType}"
+                        th:value="${questionType.getType()}" th:text="${questionType.getType()}">
+                </option>
+            </datalist></p>
+        <div>
+            <input type="text" th:value="${#httpServletRequest.remoteUser}" name="bannerID" style="visibility: hidden">
+        </div>
+        <input type="submit" value="Next Page"
+               id="nextPage"
+               style="margin-top: 10px; text-align: center; height: 36px; width: 150px">
+        </form>
+    </div>
 </div>
 
 </body>
