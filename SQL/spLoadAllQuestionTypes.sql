@@ -1,0 +1,10 @@
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS spLoadAllQuestionTypes $$
+
+CREATE PROCEDURE spLoadAllQuestionTypes()
+BEGIN
+	SELECT * FROM QuestionType;
+END $$
+
+DELIMITER ;
