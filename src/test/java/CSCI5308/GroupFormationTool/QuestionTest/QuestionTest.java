@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @SpringBootTest
 @SuppressWarnings("deprecation")
@@ -111,7 +114,46 @@ class QuestionTest
         assertTrue(question.getTypeID()==1);
 
     }
+    @Test
+    public void deleteQuestionByIdTest()
+    {
+        IQuestionPersistence questionDB=new QuestionDBMock();
+        boolean status=questionDB.deleteQuestionById(0);
+        assertTrue(status);
+
+    }
+    @Test
+    public void loadQuestionByInstIDTest()
+    {
+        IQuestionPersistence questionDB=new QuestionDBMock();
+		List<Question> questionList = new ArrayList<>();
+		questionList=questionDB.loadQuestionByInstID(22);
+        assertTrue(questionList.get(0).getQuestionID()==0);
+        assertTrue(questionList.get(0).getQuestionTitle().equals("Temp"));
+        assertTrue(questionList.get(0).getQuestionText().equals("Test"));
+        assertTrue(questionList.get(0).getTypeID()==1);
+    }
+    @Test
+    public void loadQuestionByQIDTest()
+    {
+        IQuestionPersistence questionDB=new QuestionDBMock();
+		List<Question> questionList = new ArrayList<>();
+		questionList=questionDB.loadQuestionByQID(0);
+        assertTrue(questionList.get(0).getQuestionID()==0);
+        assertTrue(questionList.get(0).getQuestionTitle().equals("Temp"));
+        assertTrue(questionList.get(0).getQuestionText().equals("Test"));
+        assertTrue(questionList.get(0).getTypeID()==1);
+    }
+    @Test
+    public void loadAllQuestionfromDBTest()
+    {
+        IQuestionPersistence questionDB=new QuestionDBMock();
+		List<Question> questionList = new ArrayList<>();
+		questionList=questionDB.loadAllQuestionfromDB();
+        assertTrue(questionList.get(0).getQuestionID()==0);
+        assertTrue(questionList.get(0).getQuestionTitle().equals("Temp"));
+        assertTrue(questionList.get(0).getQuestionText().equals("Test"));
+        assertTrue(questionList.get(0).getTypeID()==1);
+    }
 
 }
-
-
