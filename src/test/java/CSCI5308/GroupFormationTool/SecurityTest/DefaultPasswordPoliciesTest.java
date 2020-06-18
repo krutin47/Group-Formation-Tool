@@ -1,9 +1,9 @@
 package CSCI5308.GroupFormationTool.SecurityTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
+import CSCI5308.GroupFormationTool.AccessControlTest.UserDBMock;
 import CSCI5308.GroupFormationTool.Security.DefaultPasswordPolicies;
-import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
-import CSCI5308.GroupFormationTool.SystemConfig;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
@@ -50,17 +50,14 @@ class DefaultPasswordPoliciesTest {
     @Test
     void passwordCheckNotAllowedCharacter() {
         DefaultPasswordPolicies passwordPolicies = new DefaultPasswordPolicies();
-        String[] test = {"#","!","1"};
+        String[] test = {"#","!","@"};
         Assert.isTrue(passwordPolicies.passwordCheckNotAllowedCharacter("This_is-me-The-P@ssword", test),
                 "Password is less than minimum lowercase Characters");
     }
 
     @Test
     void passwordCheckHistory() {
-        DefaultPasswordPolicies passwordPolicies = new DefaultPasswordPolicies();
-        IUserPersistence userDB = SystemConfig.instance().getUserDB();
-        IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
-        Assert.isTrue(passwordPolicies.passwordCheckHistory("hello", 2, 9, userDB, passwordEncryption),
-                "Password is less than minimum lowercase Characters");
+        IUserPersistence userDBMock = new UserDBMock();
+        Assertions.assertEquals( "password", userDBMock.fetchOldPasswords(1,1).get(0));
     }
 }

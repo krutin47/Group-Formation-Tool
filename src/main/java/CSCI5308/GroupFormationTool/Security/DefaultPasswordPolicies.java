@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.Security;
 import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DefaultPasswordPolicies implements IPasswordPolicies {
@@ -21,7 +22,7 @@ public class DefaultPasswordPolicies implements IPasswordPolicies {
     public boolean passwordCheckMinUppercaseCharacter(String rawPassword, int minUppercaseCharacters) {
         List<String> upperCh = new ArrayList<>(rawPassword.length());
         String[] ch = rawPassword.split("");
-
+        System.out.println("passwordCheckMinUppercaseCharacter");
         for (String character : ch){
             if(character.matches("[A-Z]+")) {
                 upperCh.add(character);
@@ -49,20 +50,21 @@ public class DefaultPasswordPolicies implements IPasswordPolicies {
     public boolean passwordCheckMinSpecialCharacter(String rawPassword, int minSpecialCharacter) {
         List<String> specialCh = new ArrayList<>(rawPassword.length());
         String[] ch = rawPassword.split("");
-
+        System.out.println("passwordCheckMinSpecialCharacter");
         for (String character : ch){
-            if(!character.matches("[A-Za-z0-9 ]*")) {
+            System.out.println(!character.matches("[A-Za-z0-9 ]+"));
+            if(!character.matches("[A-Za-z0-9 ]+")) {
                 specialCh.add(character);
             }
         }
-
+        System.out.println(specialCh.size() >= minSpecialCharacter);
         return specialCh.size() >= minSpecialCharacter;
     }
 
     @Override
     public boolean passwordCheckNotAllowedCharacter(String rawPassword, String[] notAllowed) {
         String[] ch = rawPassword.split("");
-
+        System.out.println(Arrays.toString(notAllowed));
         for (String character : ch){
             for(String notAllowedCharacter : notAllowed){
                 if(character.equals(notAllowedCharacter)) {
