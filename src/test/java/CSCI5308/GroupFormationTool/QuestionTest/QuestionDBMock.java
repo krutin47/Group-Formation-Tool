@@ -6,51 +6,74 @@ import java.util.List;
 
 public class QuestionDBMock implements IQuestionPersistence {
 
+	 public List<Question> loadAllQuestion() {
 
-    public List<Question> loadAllQuestion() {
+	        List<Question> questionList = new ArrayList<>();
+	        Question question = new Question();
+	        question.setQuestionID(0);
+	        question.setQuestionTitle("Temp");
+	        question.setQuestionText("Test");
+	        question.setTypeID(1);
+	        questionList.add(question);
+	        question=new Question();
+	        question.setQuestionID(1);
+	        question.setQuestionTitle("Temp2");
+	        question.setQuestionText("Test2");
+	        question.setTypeID(2);
+	        questionList.add(question);
+	        return questionList;
+	    }
 
-        List<Question> questionList = new ArrayList<>();
-        Question question = new Question();
-        question.setId(0);
-        question.setTitle("Temp");
-        question.setText("Test");
-        question.setTypeID(1);
-        questionList.add(question);
-        question=new Question();
-        question.setId(1);
-        question.setTitle("Temp2");
-        question.setText("Test2");
-        question.setTypeID(2);
-        questionList.add(question);
-        return questionList;
+
+	    public void loadQuestionByID(long id, Question question) {
+	        question.setQuestionID(id);
+	        question.setQuestionTitle("Temp");
+	        question.setQuestionText("Test");
+	        question.setTypeID(1);
+	    }
+
+
+	    public boolean createQuestion(Question question) {
+	        question.setQuestionID(0);
+	        question.setQuestionTitle("Temp");
+	        question.setQuestionText("Test");
+	        question.setTypeID(1);
+	        return true;
+	    }
+
+
+	    public boolean deleteQuestion(long id)
+	    {
+	        Question question=new Question();
+	        question.setQuestionID(0);
+	        question.setQuestionTitle("Temp");
+	        question.setQuestionText("Test");
+	        question.setTypeID(1);
+	        question.setDefaults();
+	        return true;
+	    }
+
+	
+
+   
+    public List<Question> loadAllQuestionfromDB() {
+        return null;
     }
 
+   
 
-    public void loadQuestionByID(long id, Question question) {
-        question.setId(id);
-        question.setTitle("Temp");
-        question.setText("Test");
-        question.setTypeID(1);
+    public List<Question> loadQuestionByInstID(long id) {
+        return null;
+
+    
+    }
+    public List<Question> loadQuestionByQID(long id) {
+        return null;
+
     }
 
-
-    public boolean createQuestion(Question question) {
-        question.setId(0);
-        question.setTitle("Temp");
-        question.setText("Test");
-        question.setTypeID(1);
-        return true;
-    }
-
-
-    public boolean deleteQuestion(long id)
-    {
-        Question question=new Question();
-        question.setId(0);
-        question.setTitle("Temp");
-        question.setText("Test");
-        question.setTypeID(1);
-        question.setDefaults();
-        return true;
-    }
+    public boolean deleteQuestionById(long id) {
+        return false;
+}
+    
 }
