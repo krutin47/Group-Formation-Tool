@@ -1,12 +1,13 @@
 package CSCI5308.GroupFormationTool.Questions;
 
+import java.sql.Date;
 import java.util.List;
 
 public class Question {
     private long questionID;
     private String questionTitle;
     private String questionText;
-    private String creationDate;
+    private Date creationDate;
     private String questionType;
     private String bannerID;
     List<Choice> choices;
@@ -15,14 +16,14 @@ public class Question {
         //default constructor
     }
 
-    public Question(long questionID, String questionTitle, String questionText, String creationDate) {
+    public Question(long questionID, String questionTitle, String questionText, Date creationDate) {
         this.questionID = questionID;
         this.questionTitle = questionTitle;
         this.questionText = questionText;
         this.creationDate = creationDate;
     }
 
-    public Question(long questionID, String questionTitle, String questionText, String creationDate, String questionType) {
+    public Question(long questionID, String questionTitle, String questionText, Date creationDate, String questionType) {
         this.questionID = questionID;
         this.questionTitle = questionTitle;
         this.questionText = questionText;
@@ -62,11 +63,11 @@ public class Question {
         this.questionText = questionText;
     }
 
-    public String getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
