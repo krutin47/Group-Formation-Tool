@@ -1,0 +1,66 @@
+package CSCI5308.GroupFormationTool.SecurityTest;
+
+import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
+import CSCI5308.GroupFormationTool.Security.DefaultPasswordPolicies;
+import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import CSCI5308.GroupFormationTool.SystemConfig;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
+
+@SpringBootTest
+@SuppressWarnings("deprecation")
+class DefaultPasswordPoliciesTest {
+
+    @Test
+    void passwordCheckMinLength() {
+        DefaultPasswordPolicies passwordPolicies = new DefaultPasswordPolicies();
+        Assert.isTrue(passwordPolicies.passwordCheckMinLength("This_is-me-The-P@ssword", 6),
+                "Password is less than minimum length");
+    }
+
+    @Test
+    void passwordCheckMaxLength() {
+        DefaultPasswordPolicies passwordPolicies = new DefaultPasswordPolicies();
+        Assert.isTrue(passwordPolicies.passwordCheckMaxLength("This_is-me-The-P@ssword", 25),
+                "Password is greater than maximum length");
+    }
+
+    @Test
+    void passwordCheckMinUppercaseCharacter() {
+        DefaultPasswordPolicies passwordPolicies = new DefaultPasswordPolicies();
+        Assert.isTrue(passwordPolicies.passwordCheckMinUppercaseCharacter("This_is-me-The-P@ssword", 2),
+                "Password is less than minimum uppercase Characters");
+    }
+
+    @Test
+    void passwordCheckMinLowercaseCharacter() {
+        DefaultPasswordPolicies passwordPolicies = new DefaultPasswordPolicies();
+        Assert.isTrue(passwordPolicies.passwordCheckMinLowercaseCharacter("This_is-me-The-P@ssword", 6),
+                "Password is less than minimum lowercase Characters");
+    }
+
+    @Test
+    void passwordCheckMinSpecialCharacter() {
+        DefaultPasswordPolicies passwordPolicies = new DefaultPasswordPolicies();
+        Assert.isTrue(passwordPolicies.passwordCheckMinSpecialCharacter("This_is-me-The-P@ssword", 1),
+                "Password is less than minimum lowercase Characters");
+    }
+
+    @Test
+    void passwordCheckNotAllowedCharacter() {
+        DefaultPasswordPolicies passwordPolicies = new DefaultPasswordPolicies();
+        String[] test = {"#","!","1"};
+        Assert.isTrue(passwordPolicies.passwordCheckNotAllowedCharacter("This_is-me-The-P@ssword", test),
+                "Password is less than minimum lowercase Characters");
+    }
+
+    @Test
+    void passwordCheckHistory() {
+        DefaultPasswordPolicies passwordPolicies = new DefaultPasswordPolicies();
+        IUserPersistence userDB = SystemConfig.instance().getUserDB();
+        IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+        Assert.isTrue(passwordPolicies.passwordCheckHistory("hello", 2, 9, userDB, passwordEncryption),
+                "Password is less than minimum lowercase Characters");
+    }
+}
