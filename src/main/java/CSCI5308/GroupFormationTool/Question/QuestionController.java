@@ -133,7 +133,7 @@ public class QuestionController {
 		questionID=storingValue;
 		model.addAttribute("questionID", questionID);
 		q.setQuestionID(questionID);
-		q.delete(questionDB);
+		q.deleteQuestion(questionDB);
 		ModelAndView mav = new ModelAndView("redirect:/question/questionmanager");
 		return mav;
    	}

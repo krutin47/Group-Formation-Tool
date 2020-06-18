@@ -17,16 +17,16 @@ class QuestionTest
     public void ConstructorTests()
     {
         Question question=new Question();
-        Assert.isTrue(question.getId() == -1);
-        Assert.isTrue(question.getTitle().isEmpty());
-        Assert.isTrue(question.getText().isEmpty());
+        Assert.isTrue(question.getQuestionID() == -1);
+        Assert.isTrue(question.getQuestionTitle().isEmpty());
+        Assert.isTrue(question.getQuestionText().isEmpty());
         Assert.isTrue(question.getTypeID()== -1);
 
         IQuestionPersistence questionDB=new QuestionDBMock();
         question=new Question(0,questionDB);
-        Assert.isTrue(question.getId() == 0);
-        Assert.isTrue(question.getTitle().equals("Temp"));
-        Assert.isTrue(question.getText().equals("Test"));
+        Assert.isTrue(question.getQuestionID() == 0);
+        Assert.isTrue(question.getQuestionTitle().equals("Temp"));
+        Assert.isTrue(question.getQuestionText().equals("Test"));
         Assert.isTrue(question.getTypeID() == 1);
     }
 
@@ -34,24 +34,24 @@ class QuestionTest
     public void setIdTest()
     {
         Question question=new Question();
-        question.setId(7);
-        Assert.isTrue(question.getId() == 7);
+        question.setQuestionID(7);
+        Assert.isTrue(question.getQuestionID() == 7);
     }
 
     @Test
     public void getIdTest()
     {
         Question question=new Question();
-        question.setId(7);
-        Assert.isTrue(question.getId() == 7);
+        question.setQuestionID(7);
+        Assert.isTrue(question.getQuestionID() == 7);
     }
 
     @Test
     public void setTitleTest()
     {
         Question question=new Question();
-        question.setTitle("Temp");
-        Assert.isTrue(question.getTitle().equals("Temp"));
+        question.setQuestionTitle("Temp");
+        Assert.isTrue(question.getQuestionTitle().equals("Temp"));
 
     }
 
@@ -59,16 +59,16 @@ class QuestionTest
     public void getTitleTest()
     {
         Question question=new Question();
-        question.setTitle("Temp");
-        Assert.isTrue(question.getTitle().equals("Temp"));
+        question.setQuestionTitle("Temp");
+        Assert.isTrue(question.getQuestionTitle().equals("Temp"));
     }
 
     @Test
     public void setTextTest()
     {
         Question question=new Question();
-        question.setText("Test");
-        Assert.isTrue(question.getText().equals("Test"));
+        question.setQuestionText("Test");
+        Assert.isTrue(question.getQuestionText().equals("Test"));
     }
 
 
@@ -76,8 +76,8 @@ class QuestionTest
     public void getTextTest()
     {
         Question question=new Question();
-        question.setTitle("Test");
-        Assert.isTrue(question.getTitle().equals("Test"));
+        question.setQuestionTitle("Test");
+        Assert.isTrue(question.getQuestionTitle().equals("Test"));
     }
 
     @Test
@@ -110,14 +110,14 @@ class QuestionTest
     {
         IQuestionPersistence questionDB=new QuestionDBMock();
         Question question=new Question();
-        question.setId(0);
-        question.setTitle("Temp");
-        question.setText("Test");
+        question.setQuestionID(0);
+        question.setQuestionTitle("Temp");
+        question.setQuestionText("Test");
         question.setTypeID(1);
         questionDB.createQuestion(question);
-        Assert.isTrue(question.getId()==0);
-        Assert.isTrue(question.getTitle().equals("Temp"));
-        Assert.isTrue(question.getText().equals("Test"));
+        Assert.isTrue(question.getQuestionID()==0);
+        Assert.isTrue(question.getQuestionTitle().equals("Temp"));
+        Assert.isTrue(question.getQuestionText().equals("Test"));
         Assert.isTrue(question.getTypeID()==1);
 
     }
