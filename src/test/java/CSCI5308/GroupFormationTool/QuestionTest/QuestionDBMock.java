@@ -1,8 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionTest;
-
 import CSCI5308.GroupFormationTool.Question.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.Question.Question;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,11 +59,13 @@ public class QuestionDBMock implements IQuestionPersistence {
     public List<Question> loadAllQuestionfromDB() {
         return null;
     }
+
    
 
     public List<Question> loadQuestionByInstID(long id) {
         return null;
 
+    
     }
     public List<Question> loadQuestionByQID(long id) {
         return null;
@@ -74,6 +74,6 @@ public class QuestionDBMock implements IQuestionPersistence {
 
     public boolean deleteQuestionById(long id) {
         return false;
-    }
+}
     
 }
