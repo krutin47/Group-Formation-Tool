@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.QuestionsTest;
 
-import CSCI5308.GroupFormationTool.Question.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.Questions.Choice;
 import CSCI5308.GroupFormationTool.Questions.IQuestion;
 import CSCI5308.GroupFormationTool.Questions.Question;
