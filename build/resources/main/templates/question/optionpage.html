@@ -9,15 +9,15 @@
 </head>
 <body>
     <div style="margin-top:40px; margin-left: 10px; position:relative;" align="center">
-        <div>
+        <div sec:authorize="isAuthenticated()">
             <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
             <form th:action="@{/logout}" method="post">
                 <input type="submit" value="Sign Out"/>
             </form>
         </div>
         <div style="margin-top:10px"><a href="/">Go to Home Page</a></div>
-        <div style="margin-top:10px"><p>TO ADD THIS TYPE OF QUESTION, YOU ALSO NEED TO ADD THE OPTIONS</p></div>
-        <div>
+        <div style="margin-top:10px"><p style="font-weight: bold">TO ADD THIS TYPE OF QUESTION, YOU ALSO NEED TO ADD THE OPTIONS</p></div>
+        <div sec:authorize="isAuthenticated()">
             <h4>Answers</h4>
             <hr>
             <form method="post" id="addOptions" th:action="@{/question/addquestionoptions}"

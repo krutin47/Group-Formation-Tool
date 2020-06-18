@@ -10,9 +10,11 @@ public class QuestionService implements IQuestion {
     @Override
     public boolean createMCQuestion(Question question) {
         Boolean addQuestion = createSimpleQuestion(question);
+
         if (!addQuestion){
             return false;
         }
+
         List<Choice> choices = question.getChoices();
         for (Choice option: choices){
             CallStoredProcedure callStoredProcedure = null;

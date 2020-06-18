@@ -66,10 +66,12 @@ public class QuestionManagerController {
         }
         Boolean saveQuestionOption = questionDB.createMCQuestion(question);
         System.out.println(saveQuestionOption);
+
         if(!saveQuestionOption){
             modelAndView.setViewName("question/question-error");
             return modelAndView;
         }
+
         modelAndView.setViewName("question/question-added");
         return modelAndView;
     }

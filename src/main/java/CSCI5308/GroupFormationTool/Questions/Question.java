@@ -12,7 +12,7 @@ public class Question {
     List<Choice> choices;
 
     public Question(){
-
+        //default constructor
     }
 
     public Question(long questionID, String questionTitle, String questionText, String creationDate) {

@@ -7,6 +7,7 @@ public class Choice {
     private long questionID;
 
     public Choice() {
+
     }
 
     public Choice(String optionText, int optionValue) {

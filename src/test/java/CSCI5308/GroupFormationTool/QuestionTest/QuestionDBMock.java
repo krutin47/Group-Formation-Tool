@@ -6,7 +6,6 @@ import java.util.List;
 
 public class QuestionDBMock implements IQuestionPersistence {
 
-
     public List<Question> loadAllQuestion() {
 
         List<Question> questionList = new ArrayList<>();
