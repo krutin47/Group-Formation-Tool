@@ -33,21 +33,18 @@ public class InstructorAdminController
 		if (course.isCurrentUserEnrolledAsRoleInCourse(Role.INSTRUCTOR))			{
 			model.addAttribute("displaylink", true);
 			return "course/instructoradmin";
-
 		}
 		if (course.isCurrentUserEnrolledAsRoleInCourse(Role.INSTRUCTOR) ||
 				course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
 		{
 			return "course/instructoradmin";
 		}
-
 		else
 		{
 			return "logout";
 		}
 	}
-
-
+	
 
 	@GetMapping("/course/instructoradminresults")
 	public String instructorAdmin(
@@ -94,6 +91,8 @@ public class InstructorAdminController
 			return "logout";
 		}
 	}
+	
+
 
 
 
@@ -112,6 +111,4 @@ public class InstructorAdminController
 
 		return mav;
 	}
-
-
 }

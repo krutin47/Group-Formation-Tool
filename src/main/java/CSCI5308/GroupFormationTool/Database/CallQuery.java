@@ -2,11 +2,9 @@ package CSCI5308.GroupFormationTool.Database;
 import java.sql.*;
 
 public class CallQuery {
-
     private Connection connection;
     private Statement statement;
     private String query;
-
 
     public CallQuery(String query) throws SQLException
     {
@@ -16,6 +14,7 @@ public class CallQuery {
         openConnection();
         createStatement();
     }
+
     private void createStatement() throws SQLException
     {
         statement = connection.createStatement();
@@ -48,7 +47,6 @@ public class CallQuery {
         }
     }
 
-
     public ResultSet executeWithResults(String query) throws SQLException
     {
         if (statement.execute(query))
@@ -63,7 +61,6 @@ public class CallQuery {
         return null;
     }
 
-
     public void execute(String query) throws SQLException
     {
         statement.execute(query);
@@ -73,7 +70,5 @@ public class CallQuery {
         statement.executeUpdate(query);
 
     }
-
 }
-
 

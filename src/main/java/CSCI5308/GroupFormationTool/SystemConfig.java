@@ -28,7 +28,7 @@ public class SystemConfig
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
 	private IQuestion questionService;
 	private IQuestionType questionTypeService;
-	
+
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
 	private SystemConfig() {

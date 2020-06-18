@@ -23,6 +23,7 @@
 	<div th:if="${successful}">
 		<h4>Successful</h4>
 		<br/>
+<<<<<<< HEAD
 		<table>
 			<tr th:each="msg : ${successful}">
 				<td>
@@ -63,3 +64,51 @@
 </div>
 </body>
 </html>
+=======
+		<div th:if="${displayresults}">
+			<h3>Results of previous import:</h3>
+			<br/>
+			<div th:if="${successful}">
+				<h4>Successful</h4>
+				<br/>
+		  		<table>
+					<tr th:each="msg : ${successful}">
+						<td>
+							<span th:text="${msg}"></span>
+						</td>
+					</tr>
+		  		</table>
+			</div>
+			<div th:if="${failures}">
+				<h4>Failures</h4>
+				<br/>
+		  		<table>
+					<tr th:each="msg : ${failures}">
+						<td>
+							<span th:text="${msg}"></span>
+						</td>
+					</tr>
+		  		</table>
+		  		<br/>
+			</div>
+		</div>
+		<p>
+			This tool allows you to import and enroll students in the system by uploading a CSV
+			file (banner ID, first name, last name, email). Each student will have an account
+			created if they do not already exist in the system, and will be emailed with their
+			login credentials.
+		</p>
+		<form th:action="@{/course/uploadcsv(id=${course.id})}" method="post" enctype="multipart/form-data">
+			<label>File to upload:</label>
+			<input type="file" name="file">
+			<button type="submit">Upload CSV File</button>
+		</form>
+        <br/>
+		<a th:href="@{/course/enrollta(id=${course.id})}">Enroll TAs</a>
+		 <br/>
+		 <div th:if="${displaylink}">
+		<a th:href="@{/question/questionmanager}">Question Manager Page</a>
+		</div>
+	</body>
+</html>
+>>>>>>> origin/feature/question_manager
