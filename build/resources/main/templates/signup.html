@@ -25,6 +25,7 @@
 			<form class="regnLoginGridContainer" th:action="@{/signup}" method="post">
 				<label class="regnLoginGridLeftCol" for="sBannerInput">Banner ID:</label><input id="sBannerInput" class="regnLoginGridRightCol" type="text" name="username"/>
 				<label class="regnLoginGridLeftCol" for="sPswdInput">Password:</label><input id="sPswdInput" class="regnLoginGridRightCol" type="password" name="password"/>
+				<p style="font-size:10px" th:each="hint_text : ${hint}" th:text="${hint_text}"></p>
 				<label class="regnLoginGridLeftCol" for="sPswdConfirmInput">Password (Confirmation):</label><input id="sPswdConfirmInput" class="regnLoginGridRightCol" type="password" name="passwordConfirmation"/>
 				<label class="regnLoginGridLeftCol" for="sFNameInput">First Name:</label><input id="sFNameInput" class="regnLoginGridRightCol" type="text" name="firstName"/>
 				<label class="regnLoginGridLeftCol" for="sLNameInput">Last Name:</label><input id="sLNameInput" class="regnLoginGridRightCol" type="text" name="lastName"/>
