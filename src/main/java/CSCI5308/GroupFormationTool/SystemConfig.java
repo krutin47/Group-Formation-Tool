@@ -8,7 +8,6 @@ import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.Courses.*;
-import CSCI5308.GroupFormationTool.Question.*;
 
 /*
  * This is a singleton, we will learn about these when we learn design patterns.
@@ -22,20 +21,17 @@ import CSCI5308.GroupFormationTool.Question.*;
 public class SystemConfig
 {
 	private static SystemConfig uniqueInstance = null;
-	
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
-	private IQuestionPersistence questionDB;
 	private IQuestion questionService;
 	private IQuestionType questionTypeService;
 	
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
-	private SystemConfig()
-	{
+	private SystemConfig() {
 		// The default instantiations are the choices that would be used in the
 		// production application. These choices can all be overridden by test
 		// setup logic when necessary.
@@ -44,14 +40,12 @@ public class SystemConfig
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
-		questionDB=new QuestionDB();
 		questionService = new QuestionService();
 		questionTypeService = new QuestionTypeService();
 	}
 	
 	// This is the way the rest of the application gets access to the System object.
-	public static SystemConfig instance()
-	{
+	public static SystemConfig instance() {
 		// Using lazy initialization, this is the one and only place that the System
 		// object will be instantiated.
 		if (null == uniqueInstance)
@@ -66,14 +60,12 @@ public class SystemConfig
 		return passwordEncryption;
 	}
 	
-	public void setPasswordEncryption(IPasswordEncryption passwordEncryption)
-	{
+	public void setPasswordEncryption(IPasswordEncryption passwordEncryption) {
 		this.passwordEncryption = passwordEncryption;
 	}
 
 
-	public IUserPersistence getUserDB()
-	{
+	public IUserPersistence getUserDB() {
 
 		return userDB;
 	}
@@ -89,44 +81,28 @@ public class SystemConfig
 		return databaseConfiguration;
 	}
 	
-	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration)
-	{
+	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration) {
 		this.databaseConfiguration = databaseConfiguration;
 	}
 
 
-	public void setCourseDB(ICoursePersistence courseDB)
-	{
+	public void setCourseDB(ICoursePersistence courseDB) {
 		this.courseDB = courseDB;
 	}
 
 
-	public ICoursePersistence getCourseDB()
-	{
+	public ICoursePersistence getCourseDB() {
 		return courseDB;
 	}
 
 
-	public void setCourseUserRelationshipDB(ICourseUserRelationshipPersistence courseUserRelationshipDB)
-	{
+	public void setCourseUserRelationshipDB(ICourseUserRelationshipPersistence courseUserRelationshipDB) {
 		this.courseUserRelationshipDB = courseUserRelationshipDB;
 	}
-
 
 	public ICourseUserRelationshipPersistence getCourseUserRelationshipDB()
 	{
 		return courseUserRelationshipDB;
-	}
-
-	public void setQuestionDB(IQuestionPersistence questionDB)
-	{
-		this.questionDB=questionDB;
-
-	}
-
-	public IQuestionPersistence getQuestionDB()
-	{
-		return questionDB;
 	}
 
 	public IQuestion getQuestionService() {

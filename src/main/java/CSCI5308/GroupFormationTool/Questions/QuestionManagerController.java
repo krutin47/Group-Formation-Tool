@@ -2,7 +2,6 @@ package CSCI5308.GroupFormationTool.Questions;
 
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
 import CSCI5308.GroupFormationTool.AccessControl.User;
-import CSCI5308.GroupFormationTool.Question.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
