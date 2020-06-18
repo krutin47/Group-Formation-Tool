@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.Questions;
 
+import java.util.List;
+
 public class Question {
     private long questionID;
     private String questionTitle;
@@ -7,6 +9,11 @@ public class Question {
     private String creationDate;
     private String questionType;
     private String bannerID;
+    List<Choice> choices;
+
+    public Question(){
+
+    }
 
     public Question(long questionID, String questionTitle, String questionText, String creationDate) {
         this.questionID = questionID;
@@ -23,11 +30,12 @@ public class Question {
         this.questionType = questionType;
     }
 
-    public Question(String questionTitle, String questionText, String questionType, String bannerID) {
+    public Question(String questionTitle, String questionText, String questionType, String bannerID, List<Choice> choices) {
         this.questionTitle = questionTitle;
         this.questionText = questionText;
         this.questionType = questionType;
         this.bannerID = bannerID;
+        this.choices = choices;
     }
 
     public long getQuestionID() {
@@ -76,5 +84,13 @@ public class Question {
 
     public void setBannerID(String bannerID) {
         this.bannerID = bannerID;
+    }
+
+    public List<Choice> getChoices() {
+        return choices;
+    }
+
+    public void setChoices(List<Choice> choices) {
+        this.choices = choices;
     }
 }

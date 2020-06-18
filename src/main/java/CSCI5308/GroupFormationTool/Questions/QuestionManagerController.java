@@ -1,9 +1,11 @@
 package CSCI5308.GroupFormationTool.Questions;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,29 +28,61 @@ public class QuestionManagerController {
             @RequestParam(value = "questionTitle") String questionTitle,
             @RequestParam(value = "questionText") String questionText,
             @RequestParam(value = "questionTypeList") String questionType,
-            @RequestParam(value = "bannerID") String bannerID
+            @RequestParam(value = "bannerID") String bannerID,
+            ModelAndView modelAndView
     ){
-        ModelAndView modelAndView = new ModelAndView();
+        List<Choice> choices = new ArrayList<>();
         if(questionType.equalsIgnoreCase("Free text")  || questionType.equalsIgnoreCase("Numeric")){
             Question question = new Question(
                     questionTitle,
                     questionText,
                     questionType,
-                    bannerID
+                    bannerID,
+                    choices
             );
             Boolean questionAddition = questionDB.createSimpleQuestion(question);
+            if(!questionAddition){
+                modelAndView.setViewName("question/question-error");
+                return modelAndView;
+            }
             modelAndView.setViewName("question/question-added");
         }
         else {
-            modelAndView = modelAndView.addObject("Question",new Question(questionTitle, questionText, questionType, bannerID));
+            choices.add(new Choice());
+            Question question = new Question(questionTitle, questionText, questionType, bannerID, choices);
+            modelAndView = modelAndView.addObject("Question", question);
             modelAndView.setViewName("question/optionpage");
         }
         return modelAndView;
     }
 
-    @RequestMapping(value = "/addoptions", params = {"addRow"})
-    public ModelAndView addOptions(){
-        ModelAndView modelAndView = new ModelAndView();
+
+    @PostMapping("/question/addquestionoptions")
+    public ModelAndView addQuestionOptions(@ModelAttribute(value = "Question") Question question,
+                                           ModelAndView modelAndView){
+        if(question.getChoices().isEmpty()){
+            modelAndView.setViewName("question/question-error");
+            return modelAndView;
+        }
+        Boolean saveQuestionOption = questionDB.createMCQuestion(question);
+        System.out.println(saveQuestionOption);
+        if(!saveQuestionOption){
+            modelAndView.setViewName("question/question-error");
+            return modelAndView;
+        }
+        modelAndView.setViewName("question/question-added");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/question/addquestionoptions", params = {"addRow"})
+    public ModelAndView addOptions(final Question question,
+                                   final BindingResult bindingResult,
+                                   final ModelAndView modelAndView){
+        System.out.println(question);
+        question.getChoices().add(new Choice());
+        modelAndView.addObject("Question", question);
+        modelAndView.setViewName("question/optionpage");
+        return modelAndView;
+    }
+
 }

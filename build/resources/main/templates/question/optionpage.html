@@ -15,16 +15,33 @@
                 <input type="submit" value="Sign Out"/>
             </form>
         </div>
+        <div style="margin-top:10px"><a href="/">Go to Home Page</a></div>
+        <div style="margin-top:10px"><p>TO ADD THIS TYPE OF QUESTION, YOU ALSO NEED TO ADD THE OPTIONS</p></div>
         <div>
             <h4>Answers</h4>
             <hr>
-            <form role="form" method="post" id="addOptions" th:action="@{/question/addquestionoption}">
+            <form method="post" id="addOptions" th:action="@{/question/addquestionoptions}"
+            th:object="${Question}" >
                 <table>
                     <tbody>
+                        <input type="text" th:value="${Question.questionTitle}" th:field="${Question.questionTitle}" style="visibility: hidden">
+                        <input type="text" th:value="${Question.questionText}" th:field="${Question.questionText}" style="visibility: hidden">
+                        <input type="text" th:value="${Question.questionType}" th:field="${Question.questionType}" style="visibility: hidden">
+                        <input type="text" th:value="${Question.bannerID}" th:field="${Question.bannerID}" style="visibility: hidden">
+                        <tr th:each="tx, op: *{choices}">
+                            <td> Option:
+                                <input type="text" th:field="*{choices[__${op.index}__].optionText}" required>
+                            </td>
+                            <td>
+                                Option Value:
+                                <input type="number" th:field="*{choices[__${op.index}__].optionValue}" required>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <p th:text="${Question}"></p>
-                <div><button name="addRow">Another Option</button></div>
+                <div><button type="submit" name="addRow">Another Option</button></div>
+                <hr>
+                <input type="submit" value="Save" id="addQuestion" style="margin-top: 10px">
             </form>
         </div>
     </div>

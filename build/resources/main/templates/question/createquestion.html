@@ -15,6 +15,7 @@
             <input type="submit" value="Sign Out"/>
         </form>
     </div>
+    <div><a href="/">Go to Home Page</a></div>
     <h4> Enter Question Details </h4>
     <div style="margin-top:40px; margib-left: 10px; position:relative;" align="center" sec:authorize="isAuthenticated()">
         <form role="form" method="post" id="addQuestionForm" th:action="@{/question/addquestion}"
@@ -31,7 +32,7 @@
         <div>
             <input type="text" th:value="${#httpServletRequest.remoteUser}" name="bannerID" style="visibility: hidden">
         </div>
-        <input type="submit" value="Next Page"
+        <input type="submit" value="Create Question"
                id="nextPage"
                style="margin-top: 10px; text-align: center; height: 36px; width: 150px">
         </form>

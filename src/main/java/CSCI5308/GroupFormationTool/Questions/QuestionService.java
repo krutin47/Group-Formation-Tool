@@ -1,9 +1,6 @@
 package CSCI5308.GroupFormationTool.Questions;
 
-import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
-import CSCI5308.GroupFormationTool.SystemConfig;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -11,9 +8,13 @@ import java.util.List;
 public class QuestionService implements IQuestion {
 
     @Override
-    public boolean createMCQuestion(Question question, List<Options> optionsList) {
-        createSimpleQuestion(question);
-        for (Options option: optionsList){
+    public boolean createMCQuestion(Question question) {
+        Boolean addQuestion = createSimpleQuestion(question);
+        if (!addQuestion){
+            return false;
+        }
+        List<Choice> choices = question.getChoices();
+        for (Choice option: choices){
             CallStoredProcedure callStoredProcedure = null;
             try {
                 callStoredProcedure = new CallStoredProcedure("spAddOptionForQuestion(?,?,?)");
@@ -22,8 +23,9 @@ public class QuestionService implements IQuestion {
                 callStoredProcedure.setParameter(3, question.getQuestionTitle());
                 callStoredProcedure.execute();
             } catch (SQLException e) {
+                e.printStackTrace();
                 return false;
-            } finally {
+            }finally {
                 if (null != callStoredProcedure)
                 {
                     callStoredProcedure.cleanup();
@@ -44,6 +46,7 @@ public class QuestionService implements IQuestion {
             callStoredProcedure.setParameter(4, question.getBannerID());
             callStoredProcedure.execute();
         }catch (SQLException e){
+            e.printStackTrace();
             return false;
         }finally {
             if (null != callStoredProcedure)
