@@ -7,7 +7,7 @@ public class CallStoredProcedure
 	private String storedProcedureName;
 	private Connection connection;
 	private CallableStatement statement;
-	
+
 	public CallStoredProcedure(String storedProcedureName) throws SQLException
 	{
 		this.storedProcedureName = storedProcedureName;

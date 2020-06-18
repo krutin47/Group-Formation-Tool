@@ -1,16 +1,23 @@
 package CSCI5308.GroupFormationTool.Question;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
+import CSCI5308.GroupFormationTool.AccessControl.User;
+import CSCI5308.GroupFormationTool.Question.Question;
+import CSCI5308.GroupFormationTool.Question.IQuestionPersistence;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
 public class QuestionController {
-
+	private static final String ID = "id";
+	private static long storingValue = 0;
 
     @GetMapping("/createquestion")
     public String questionForm(Model model) {
@@ -32,8 +39,8 @@ public class QuestionController {
           Question q=new Question();
           if(q.isTextvalid(questionText) && (q.isTitlevalid(questionTitle)))  //check if input is right
           {
-              q.setTitle(questionTitle);
-              q.setText(questionText);
+              q.setQuestionTitle(questionTitle);
+              q.setQuestionText(questionText);
               q.setTypeID(typeID);
               if (questionDB.createQuestion(q))
               {
@@ -59,4 +66,82 @@ public class QuestionController {
 
 
     }
+    
+    
+    @GetMapping("/question/questionmanager")
+	public String viewQuestions(Model model, Long userID)
+	{
+		IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
+		User u=new User();	
+		u=CurrentUser.instance().getCurrentAuthenticatedUser();
+		userID=u.getId();
+		List<Question> ques=questionDB.loadQuestionByInstID(userID);
+		model.addAttribute("questions", ques);
+		return "question/questionmanager";
+		
+	}
+
+			
+    @GetMapping("/question/questionmanager/sortbydate")
+   	public String heySort(Model model, Long userID)
+   	{
+   		IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
+   		User u=new User();
+		u=CurrentUser.instance().getCurrentAuthenticatedUser();
+		userID=u.getId();
+   		List<Question> ques=questionDB.loadQuestionByInstID(userID);
+   		Collections.sort(ques);
+   		model.addAttribute("questions", ques);
+   		return "question/questionmanager";
+   		
+   	}
+    @GetMapping("/question/questionmanager/sortbytitle")
+   	public String heySort2(Model model, Long userID)
+   	{
+   		IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
+   		Question q = new Question();
+   		User u=new User();
+		u=CurrentUser.instance().getCurrentAuthenticatedUser();
+		userID=u.getId();
+   		List<Question> ques=questionDB.loadQuestionByInstID(userID);
+   		Collections.sort(ques,q.sortTitle);
+   		model.addAttribute("questions", ques);
+   		return "question/questionmanager";
+   		
+   	}
+    
+   
+    @GetMapping("/question/questionmanager/deletequestion")
+	public ModelAndView deleteQuestion(Model model, @RequestParam(name = ID) long questionID)
+	{
+
+    	IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
+		Question q = new Question();
+		List<Question> ques=questionDB.loadQuestionByQID(questionID);
+		model.addAttribute("questions", ques);
+		model.addAttribute("questionID", questionID);
+		storingValue=questionID;
+		q.setQuestionID(questionID);
+		ModelAndView mav = new ModelAndView("question/deletion");
+		return mav;
+	}
+    @GetMapping("/question/questionmanager/deletequestion/confirm")
+   	public ModelAndView deleteQuestionConfirm(Model model, Long questionID)
+   	{
+    	IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
+		Question q = new Question();
+		questionID=storingValue;
+		model.addAttribute("questionID", questionID);
+		q.setQuestionID(questionID);
+		q.delete(questionDB);
+		ModelAndView mav = new ModelAndView("redirect:/question/questionmanager");
+		return mav;
+   	}
+    @GetMapping("/question/questionmanager/deletequestion/cancel")
+   	public ModelAndView deleteQuestionCancel()
+   	{
+    	ModelAndView mav = new ModelAndView("redirect:/question/questionmanager");
+		return mav;
+   	}
+
 }
