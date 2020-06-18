@@ -18,5 +18,6 @@
     </div>
     <h1 style="color: red">Question cannot to be created. Unknown error occurred.</h1>
     <div><a href="/">Go to Home Page</a></div>
+    <div sec:authorize="isAuthenticated()"><a th:href="@{/question/questionmanager}">Question Management</a> </div>
 </body>
 </html>

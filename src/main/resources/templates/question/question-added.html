@@ -18,7 +18,8 @@
         <div style="margin-top: 10px">
             <h3 style="color: green">Question is added successfully</h3>
         </div>
-        <div><a href="/">Go to Home Page</a></div>
+        <div sec:authorize="isAuthenticated()"><a href="/">Go to Home Page</a></div>
+        <div sec:authorize="isAuthenticated()"><a th:href="@{/question/questionmanager}">Question Management</a> </div>
     </div>
 </body>
 </html>

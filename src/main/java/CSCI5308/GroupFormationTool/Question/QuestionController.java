@@ -67,7 +67,7 @@ public class QuestionController {
 
     }
 
-
+/*
     @GetMapping("/question/questionmanager")
     public String viewQuestions(Model model, Long userID)
     {
@@ -142,6 +142,6 @@ public class QuestionController {
     {
         ModelAndView mav = new ModelAndView("redirect:/question/questionmanager");
         return mav;
-    }
+    }*/
 
 }

@@ -1,34 +1,21 @@
 package CSCI5308.GroupFormationTool.Questions;
 
 import java.sql.Date;
+import java.util.Comparator;
 import java.util.List;
 
-public class Question {
+public class Question implements Comparable<Question>{
     private long questionID;
     private String questionTitle;
     private String questionText;
     private Date creationDate;
+    private long typeID;
     private String questionType;
     private String bannerID;
     List<Choice> choices;
 
     public Question(){
         //default constructor
-    }
-
-    public Question(long questionID, String questionTitle, String questionText, Date creationDate) {
-        this.questionID = questionID;
-        this.questionTitle = questionTitle;
-        this.questionText = questionText;
-        this.creationDate = creationDate;
-    }
-
-    public Question(long questionID, String questionTitle, String questionText, Date creationDate, String questionType) {
-        this.questionID = questionID;
-        this.questionTitle = questionTitle;
-        this.questionText = questionText;
-        this.creationDate = creationDate    ;
-        this.questionType = questionType;
     }
 
     public Question(String questionTitle, String questionText, String questionType, String bannerID, List<Choice> choices) {
@@ -79,6 +66,22 @@ public class Question {
         this.questionType = questionType;
     }
 
+    public long getTypeID() {
+        return typeID;
+    }
+
+    public void setTypeID(long typeID) {
+        this.typeID = typeID;
+    }
+
+    public Comparator<Question> getSortTitle() {
+        return sortTitle;
+    }
+
+    public void setSortTitle(Comparator<Question> sortTitle) {
+        this.sortTitle = sortTitle;
+    }
+
     public String getBannerID() {
         return bannerID;
     }
@@ -93,5 +96,27 @@ public class Question {
 
     public void setChoices(List<Choice> choices) {
         this.choices = choices;
+    }
+
+    //TO DELETE AN EXISTING QUESTION based on questionID
+    public boolean deleteQuestion(IQuestion questionDB)
+    {
+        // return questionDB.deleteQuestion(questionID);
+        return questionDB.deleteQuestionById(questionID);
+    }
+
+    public Comparator<Question> sortTitle = new Comparator<Question>() {
+        @Override
+        public int compare(Question m1, Question m2) {
+            return m1.questionTitle.compareTo(m2.questionTitle);
+        }
+    };
+
+    @Override
+    public int compareTo(Question u) {
+        if (creationDate == null || u.creationDate == null) {
+            return 0;
+        }
+        return creationDate.compareTo(u.creationDate);
     }
 }
