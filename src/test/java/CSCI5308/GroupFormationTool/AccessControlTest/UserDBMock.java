@@ -2,6 +2,8 @@ package CSCI5308.GroupFormationTool.AccessControlTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.*;
 
+import java.util.*;
+
 public class UserDBMock implements IUserPersistence
 {
 	public void loadUserByID(long id, User user)
@@ -44,5 +46,12 @@ public class UserDBMock implements IUserPersistence
 		user.setLastName("Hawkey");
 		user.setEmail("rhawkey@dal.ca");
 		return true;
+	}
+
+	@Override
+	public List<String> fetchOldPasswords(long id, int count) {
+		List<String> list = new ArrayList<>();
+		list.add("password");
+		return list;
 	}
 }
