@@ -22,10 +22,10 @@
         <h3 class="errorInfo" th:text="${errorMessage}"></h3>
     </div>
     <div class="mainGridCentreCard">
-        <form class="regnLoginGridContainer" th:action="@{/login}" method="post">
+        <form class="regnLoginGridContainer" th:action="@{/forgot}" method="post">
             <label class="regnLoginGridLeftCol" for="lBannerInput"> Banner ID:</label>
             <input id="lBannerInput" class="regnLoginGridRightCol" type="text" name="username"/>
-            <input class="regnLoginGridRightCol" type="submit" value="Log In"/>
+            <input class="regnLoginGridRightCol" type="submit" value="Reset"/>
         </form>
     </div>
     <a class="mainGridRow mainGridCentreCard" style="background-color: #fff;" th:href="@{login}">Go back to Login Page!</a>

@@ -25,15 +25,20 @@ public class ForgotController {
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
     public ModelAndView processForgotPassword(
             @RequestParam(name = USERNAME) String bannerID) {
+        System.out.println("here");
         boolean success = false;
         if (User.isBannerIDValid(bannerID)){
-
+            IUserPersistence userDB = SystemConfig.instance().getUserDB();
+            User user = new User(bannerID, userDB);
+            success = userDB.forgotPassword(user.getBannerID());
         }
         ModelAndView m;
         if (success) {
+            System.out.println("in if");
             //Go to login after successfully sending request
             m = new ModelAndView("login");
         } else {
+            System.out.println("in else");
             // Something wrong with the input data.
             m = new ModelAndView("forgot");
             m.addObject("errorMessage", "Invalid Banner ID, please check your value.");

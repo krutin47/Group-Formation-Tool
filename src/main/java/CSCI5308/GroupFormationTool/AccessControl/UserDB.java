@@ -99,9 +99,10 @@ public class UserDB implements IUserPersistence {
 	@Override
 	public boolean forgotPassword(String bannerID) {
 		CallStoredProcedure proc = null;
-		IUserPersistence iUserPersistence = SystemConfig.instance().getUserDB();
-		User user = new User(bannerID, iUserPersistence);
-		loadUserByBannerID(bannerID, user);
+//		IUserPersistence iUserPersistence = SystemConfig.instance().getUserDB();
+		User user = new User();
+
+		System.out.println("forgotPassword -->" + bannerID);
 		try{
 			if (user.getID() > 0) {
 				String random = RandomStringUtils.randomAlphanumeric(10);
