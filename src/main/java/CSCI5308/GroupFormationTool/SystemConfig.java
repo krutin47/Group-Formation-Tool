@@ -50,6 +50,7 @@ public class SystemConfig
 		questionService = new QuestionService();
 		questionTypeService = new QuestionTypeService();
 		properties = new Properties();
+		passwordPolicies = new DefaultPasswordPolicies();
 		String propertyFilePath = "src/main/resources/application.properties";
 		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
 			properties.load(in);
