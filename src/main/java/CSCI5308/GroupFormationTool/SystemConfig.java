@@ -49,6 +49,7 @@ public class SystemConfig
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
 		questionService = new QuestionService();
 		questionTypeService = new QuestionTypeService();
+		passwordPolicies = new DefaultPasswordPolicies();
 		properties = new Properties();
 		String propertyFilePath = "src/main/resources/application.properties";
 		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
