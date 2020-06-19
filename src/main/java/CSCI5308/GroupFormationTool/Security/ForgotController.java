@@ -29,8 +29,8 @@ public class ForgotController {
         boolean success = false;
         if (User.isBannerIDValid(bannerID)){
             IUserPersistence userDB = SystemConfig.instance().getUserDB();
-            User user = new User(bannerID, userDB);
-            success = userDB.forgotPassword(user.getBannerID());
+//            User user = new User(bannerID, userDB);
+            success = userDB.forgotPassword(bannerID);
         }
         ModelAndView m;
         if (success) {

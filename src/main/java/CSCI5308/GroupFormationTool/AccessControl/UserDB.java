@@ -99,30 +99,31 @@ public class UserDB implements IUserPersistence {
 	@Override
 	public boolean forgotPassword(String bannerID) {
 		CallStoredProcedure proc = null;
-//		IUserPersistence iUserPersistence = SystemConfig.instance().getUserDB();
-		User user = new User();
-
-		System.out.println("forgotPassword -->" + bannerID);
-		try{
-			if (user.getID() > 0) {
-				String random = RandomStringUtils.randomAlphanumeric(10);
-				proc = new CallStoredProcedure("spForgotPasswordUser(?,?)");
-				proc.setParameter(1, user.getID());
-				proc.setParameter(2, random);
-				SystemConfig.instance().getMailUtil().sendmail(user.getEmail(), "password reset", "your password reset link is: localhost:8080/reset?_token=" + random + "&id=" + user.getID());
-				proc.execute();
-				return true;
+		IUserPersistence iUserPersistence = SystemConfig.instance().getUserDB();
+		synchronized(this) {
+			User user = new User(bannerID, iUserPersistence);
+			System.out.println("forgotPassword -->" + bannerID);
+			try{
+				if (user.getID() > -1) {
+					String random = RandomStringUtils.randomAlphanumeric(10);
+					proc = new CallStoredProcedure("spForgotPasswordUser(?,?)");
+					proc.setParameter(1, user.getID());
+					proc.setParameter(2, random);
+					SystemConfig.instance().getMailUtil().sendmail(user.getEmail(), "password reset", "your password reset link is: localhost:8080/reset?_token=" + random + "&id=" + user.getID());
+					proc.execute();
+					return true;
+				}
+			} catch (SQLException | IOException | MessagingException e) {
+				e.printStackTrace();
+				return false;
+			} finally {
+				if (null != proc)
+				{
+					proc.cleanup();
+				}
 			}
-		} catch (SQLException | IOException | MessagingException e) {
-			e.printStackTrace();
 			return false;
-		} finally {
-			if (null != proc)
-			{
-				proc.cleanup();
-			}
 		}
-		return false;
 	}
 
 	@Override

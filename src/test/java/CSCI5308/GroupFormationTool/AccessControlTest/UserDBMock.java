@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.AccessControlTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.*;
+import CSCI5308.GroupFormationTool.SystemConfig;
 
 public class UserDBMock implements IUserPersistence
 {
@@ -44,5 +45,15 @@ public class UserDBMock implements IUserPersistence
 		user.setLastName("Hawkey");
 		user.setEmail("rhawkey@dal.ca");
 		return true;
+	}
+
+	@Override
+	public boolean forgotPassword(String bannerID) {
+		return false;
+	}
+
+	@Override
+	public boolean resetPassword(long id, String newPassword) {
+		return false;
 	}
 }

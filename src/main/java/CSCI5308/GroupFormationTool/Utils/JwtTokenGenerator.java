@@ -14,7 +14,7 @@
 //    public String createJWT(String id, String issuer, String subject, long ttlMillis) {
 //
 //        //The JWT signature algorithm we will be using to sign the token
-//        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+//        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.registerDefaultAlgorithms();
 //
 //        long nowMillis = System.currentTimeMillis();
 //        Date now = new Date(nowMillis);
