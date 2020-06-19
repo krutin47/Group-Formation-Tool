@@ -30,6 +30,13 @@
 			<aside class="mainGridRow welcomeInfoBox">
 				<h2>Welcome to the CSCI5308 Group Formation Tool!!</h2>
 			</aside>
+
+			<div>
+				<a href="admin/course" sec:authorize="isAuthenticated() && hasAuthority('ADMIN')" >
+					Click here to modify the course...
+				</a>
+			</div>
+
 			<div class="mainGridRow" sec:authorize="isAuthenticated()">
 				<!-- Display list of courses. -->
 				<!-- Learned how to do this here: https://www.baeldung.com/thymeleaf-list -->
