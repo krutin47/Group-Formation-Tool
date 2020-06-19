@@ -9,6 +9,10 @@ import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.Courses.*;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 /*
  * This is a singleton, we will learn about these when we learn design patterns.
  *
@@ -28,6 +32,9 @@ public class SystemConfig
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
 	private IQuestion questionService;
 	private IQuestionType questionTypeService;
+	private Properties properties;
+	private IPasswordPolicies passwordPolicies;
+
 
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
@@ -42,7 +49,32 @@ public class SystemConfig
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
 		questionService = new QuestionService();
 		questionTypeService = new QuestionTypeService();
+		properties = new Properties();
+		String propertyFilePath = "src/main/resources/application.properties";
+		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
+			properties.load(in);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
+
+	public IPasswordPolicies getPasswordPolicies() {
+		return passwordPolicies;
+	}
+
+	public void setPasswordPolicies(IPasswordPolicies passwordPolicies) {
+		this.passwordPolicies = passwordPolicies;
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+
 
 	// This is the way the rest of the application gets access to the System object.
 	public static SystemConfig instance() {
