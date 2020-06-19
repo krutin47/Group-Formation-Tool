@@ -6,10 +6,14 @@ CREATE PROCEDURE spCreateQuestion (
     IN questionTitle VARCHAR(45),
     IN questionText VARCHAR(1000),
     IN typeID BIGINT(20),
+    OUT creationDate DATETIME,
     OUT questionID BIGINT
 )
 BEGIN
-    INSERT INTO Question(questionTitle,questionText)
+
+    select sysdate() into @creation_date;
+
+    INSERT INTO Question(questionTitle,questionText, creationDate)
     VALUES (questionTitle,questionText);
     SET questionID = LAST_INSERT_ID();
 

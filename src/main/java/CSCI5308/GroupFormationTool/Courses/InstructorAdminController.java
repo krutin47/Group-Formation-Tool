@@ -20,7 +20,7 @@ public class InstructorAdminController
 	private static final String SUCCESSFUL = "successful";
 	private static final String FAILURES = "failures";
 	private static final String DISPLAY_RESULTS = "displayresults";
-	
+
 	@GetMapping("/course/instructoradmin")
 	public String instructorAdmin(Model model, @RequestParam(name = ID) long courseID)
 	{
@@ -29,24 +29,21 @@ public class InstructorAdminController
 		courseDB.loadCourseByID(courseID, course);
 		model.addAttribute("course", course);
 		model.addAttribute("displayresults", false);
-		
+
 		if (course.isCurrentUserEnrolledAsRoleInCourse(Role.INSTRUCTOR))			{
 			model.addAttribute("displaylink", true);
 			return "course/instructoradmin";
-
-			}
+		}
 		if (course.isCurrentUserEnrolledAsRoleInCourse(Role.INSTRUCTOR) ||
-			 course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
+				course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
 		{
 			return "course/instructoradmin";
 		}
-		
 		else
 		{
 			return "logout";
 		}
 	}
-	
 	
 
 	@GetMapping("/course/instructoradminresults")
@@ -66,7 +63,7 @@ public class InstructorAdminController
 		model.addAttribute(FAILURES, failures);
 		model.addAttribute(DISPLAY_RESULTS, displayResults);
 		if (course.isCurrentUserEnrolledAsRoleInCourse(Role.INSTRUCTOR) ||
-			 course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
+				course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
 		{
 			return "course/instructoradmin";
 		}
@@ -76,7 +73,7 @@ public class InstructorAdminController
 		}
 	}
 
-	
+
 	@GetMapping("/course/enrollta")
 	public String enrollTA(Model model, @RequestParam(name = ID) long courseID)
 	{
@@ -85,7 +82,7 @@ public class InstructorAdminController
 		courseDB.loadCourseByID(courseID, course);
 		model.addAttribute("course", course);
 		if (course.isCurrentUserEnrolledAsRoleInCourse(Role.INSTRUCTOR) ||
-			 course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
+				course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
 		{
 			return "course/enrollta";
 		}
@@ -97,9 +94,11 @@ public class InstructorAdminController
 	
 
 
+
+
 	@RequestMapping(value = "/course/uploadcsv", consumes = {"multipart/form-data"})
-   public ModelAndView upload(@RequestParam(name = FILE) MultipartFile file, @RequestParam(name = ID) long courseID)
-   {
+	public ModelAndView upload(@RequestParam(name = FILE) MultipartFile file, @RequestParam(name = ID) long courseID)
+	{
 		ICoursePersistence courseDB = SystemConfig.instance().getCourseDB();
 		Course course = new Course();
 		courseDB.loadCourseByID(courseID, course);
@@ -109,9 +108,7 @@ public class InstructorAdminController
 		mav.addObject("successful", importer.getSuccessResults());
 		mav.addObject("failures", importer.getFailureResults());
 		mav.addObject("displayresults", true);
-		
-		return mav;
-   }
 
-	
+		return mav;
+	}
 }

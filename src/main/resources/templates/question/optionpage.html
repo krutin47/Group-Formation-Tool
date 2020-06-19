@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Option Page</title>
+</head>
+<body>
+    <div style="margin-top:40px; margin-left: 10px; position:relative;" align="center">
+        <div sec:authorize="isAuthenticated()">
+            <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+        <div style="margin-top:10px"><a href="/">Go to Home Page</a></div>
+        <div style="margin-top:10px"><p style="font-weight: bold">TO ADD THIS TYPE OF QUESTION, YOU ALSO NEED TO ADD THE OPTIONS</p></div>
+        <div sec:authorize="isAuthenticated()">
+            <h4>Answers</h4>
+            <hr>
+            <form method="post" id="addOptions" th:action="@{/question/addquestionoptions}"
+            th:object="${Question}" >
+                <table>
+                    <tbody>
+                        <input type="text" th:value="${Question.questionTitle}" th:field="${Question.questionTitle}" style="visibility: hidden">
+                        <input type="text" th:value="${Question.questionText}" th:field="${Question.questionText}" style="visibility: hidden">
+                        <input type="text" th:value="${Question.questionType}" th:field="${Question.questionType}" style="visibility: hidden">
+                        <input type="text" th:value="${Question.bannerID}" th:field="${Question.bannerID}" style="visibility: hidden">
+                        <tr th:each="tx, op: *{choices}">
+                            <td> Option:
+                                <input type="text" th:field="*{choices[__${op.index}__].optionText}" required>
+                            </td>
+                            <td>
+                                Option Value:
+                                <input type="number" th:field="*{choices[__${op.index}__].optionValue}" required>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div><button type="submit" name="addRow">Another Option</button></div>
+                <hr>
+                <input type="submit" value="Save" id="addQuestion" style="margin-top: 10px">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

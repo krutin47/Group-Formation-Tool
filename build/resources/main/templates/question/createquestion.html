@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a Question</title>
+</head>
+<body>
+<div style="margin-top:40px; margin-left: 10px; position:relative;" align="center">
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div><a href="/">Go to Home Page</a></div>
+    <h4> Enter Question Details </h4>
+    <div style="margin-top:40px; margib-left: 10px; position:relative;" align="center" sec:authorize="isAuthenticated()">
+        <form role="form" method="post" id="addQuestionForm" th:action="@{/question/addquestion}"
+            th:object="${Question}">
+        <p>Question Title: <input type="text" name="questionTitle"required></p>
+        <p>Question Text: <input type="text" name="questionText" required></p>
+        <p>Question Type:
+            <input list="questionType" name="questionTypeList" id="questionTypeDropDown" required>
+            <datalist id="questionType">
+                <option th:each="questionType: ${QuestionType}"
+                        th:value="${questionType.getType()}" th:text="${questionType.getType()}">
+                </option>
+            </datalist></p>
+        <div>
+            <input type="text" th:value="${#httpServletRequest.remoteUser}" name="bannerID" style="visibility: hidden">
+        </div>
+        <input type="submit" value="Create Question"
+               id="nextPage"
+               style="margin-top: 10px; text-align: center; height: 36px; width: 150px">
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
