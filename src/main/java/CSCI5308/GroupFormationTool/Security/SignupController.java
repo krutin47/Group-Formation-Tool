@@ -25,7 +25,7 @@ public class SignupController
 	private final String FIRST_NAME = "firstName";
 	private final String LAST_NAME = "lastName";
 	private final String EMAIL = "email";
-
+	
 	@GetMapping("/signup")
 	public String displaySignup(Model model)
 	{
@@ -54,15 +54,15 @@ public class SignupController
 
 		return "signup";
 	}
-
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public ModelAndView processSignup(
-			@RequestParam(name = USERNAME) String bannerID,
-			@RequestParam(name = PASSWORD) String password,
-			@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
-			@RequestParam(name = FIRST_NAME) String firstName,
-			@RequestParam(name = LAST_NAME) String lastName,
-			@RequestParam(name = EMAIL) String email)
+	
+	@RequestMapping(value = "/signup", method = RequestMethod.POST) 
+   	public ModelAndView processSignup(
+   		@RequestParam(name = USERNAME) String bannerID,
+   		@RequestParam(name = PASSWORD) String password,
+   		@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
+   		@RequestParam(name = FIRST_NAME) String firstName,
+   		@RequestParam(name = LAST_NAME) String lastName,
+   		@RequestParam(name = EMAIL) String email)
 	{
 		boolean success = false;
 		ModelAndView m;
@@ -184,10 +184,10 @@ public class SignupController
 		}
 
 		if (User.isBannerIDValid(bannerID) &&
-				User.isEmailValid(email) &&
-				User.isFirstNameValid(firstName) &&
-				User.isLastNameValid(lastName) &&
-				password.equals(passwordConfirm))
+			 User.isEmailValid(email) &&
+			 User.isFirstNameValid(firstName) &&
+			 User.isLastNameValid(lastName) &&
+			 password.equals(passwordConfirm))
 		{
 			User u = new User();
 			u.setBannerID(bannerID);
