@@ -60,6 +60,16 @@ public class QuestionDBMock implements IQuestion {
         return questionList;
     }
 
+
+    public Question loadQuestionbyID(long id) {
+        Question question=new Question();
+        question.setQuestionID(0);
+        question.setQuestionTitle("Temp");
+        question.setQuestionText("Test");
+        question.setTypeID(1);
+        return question;
+    }
+
     public boolean deleteQuestionById(long id) {
         Question question=new Question();
         question.setQuestionID(0);
@@ -68,5 +78,23 @@ public class QuestionDBMock implements IQuestion {
         question.setTypeID(1);
         question = new Question();
         return true;
+    }
+
+
+    public List<Long> loadQuestionIDbySurveyID(long SurveyID) {
+        List<Long> questionList = new ArrayList<>();
+        Question question = new Question();
+        question.setQuestionID(0);
+        question.setQuestionTitle("Temp");
+        question.setQuestionText("Test");
+        question.setTypeID(1);
+        questionList.add(question.getQuestionID());
+        question=new Question();
+        question.setQuestionID(1);
+        question.setQuestionTitle("Temp2");
+        question.setQuestionText("Test2");
+        question.setTypeID(2);
+        questionList.add(question.getQuestionID());
+        return questionList;
     }
 }

@@ -24,7 +24,12 @@ public class CourseDBMock implements ICoursePersistence
 
 
 	public List<Course> loadCoursebyUser(long id) {
-		return null;
+		List<Course> courseList = new ArrayList<>();
+		Course course = new Course();
+		course.setId(id);
+		course.setTitle("Software Engineering");
+		courseList.add(course);
+		return courseList;
 	}
 
 	public void loadCourseByID(long id, Course course) 
@@ -51,7 +56,7 @@ public class CourseDBMock implements ICoursePersistence
 
 
 	public boolean checkCourseSurvey(long id) {
-		return false;
+		return true;
 	}
 
 }

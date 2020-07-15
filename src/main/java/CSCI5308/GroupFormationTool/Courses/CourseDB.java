@@ -118,7 +118,7 @@ public class CourseDB implements ICoursePersistence
 	}
 
 
-
+    //Check survey published or not using courseID
 	public boolean checkCourseSurvey(long id)
 	{
 		CallStoredProcedure proc = null;
@@ -130,7 +130,10 @@ public class CourseDB implements ICoursePersistence
 			ResultSet results = proc.executeWithResults();
 			if (null != results)
 			{
-				s=results.getString("isPublished");
+				while(results.next())
+				{
+					s = results.getString("isPublished");
+				}
 			}
 
 			if(s.equalsIgnoreCase("y")||s.equalsIgnoreCase("Y"))

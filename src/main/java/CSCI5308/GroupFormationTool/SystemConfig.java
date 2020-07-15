@@ -1,5 +1,9 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.Answers.AnswerDB;
+import CSCI5308.GroupFormationTool.Answers.IAnswer;
+import CSCI5308.GroupFormationTool.Answers.IStudentSurvey;
+import CSCI5308.GroupFormationTool.Answers.StudentSurveyDB;
 import CSCI5308.GroupFormationTool.Questions.IQuestion;
 import CSCI5308.GroupFormationTool.Questions.IQuestionType;
 import CSCI5308.GroupFormationTool.Questions.QuestionService;
@@ -34,6 +38,8 @@ public class SystemConfig
 	private IQuestionType questionTypeService;
 	private Properties properties;
 	private IPasswordPolicies passwordPolicies;
+	private IAnswer answerDB;
+	private IStudentSurvey studentSurvey;
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -51,6 +57,8 @@ public class SystemConfig
 		questionTypeService = new QuestionTypeService();
 		passwordPolicies = new DefaultPasswordPolicies();
 		properties = new Properties();
+		answerDB=new AnswerDB();
+		studentSurvey=new StudentSurveyDB();
 		String propertyFilePath = "src/main/resources/application.properties";
 		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
 			properties.load(in);
@@ -153,4 +161,25 @@ public class SystemConfig
 	public void setQuestionTypeService(IQuestionType questionTypeService) {
 		this.questionTypeService = questionTypeService;
 	}
+
+	public IAnswer getAnswerDB()
+	{
+		return answerDB;
+	}
+
+	public void setAnswerDB(IAnswer answerDB)
+	{
+		this.answerDB=answerDB;
+	}
+
+	public IStudentSurvey getStudentSurvey()
+	{
+		return this.studentSurvey;
+	}
+
+	public void setStudentSurvey(IStudentSurvey studentSurvey)
+	{
+		this.studentSurvey=studentSurvey;
+	}
+
 }
