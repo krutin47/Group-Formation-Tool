@@ -2,6 +2,8 @@ package CSCI5308.GroupFormationTool.AccessControl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
@@ -115,5 +117,37 @@ public class UserDB implements IUserPersistence
 	{
 		// Coming in M2!
 		return false;
+	}
+
+	@Override
+	public List<String> fetchOldPasswords(long id, int count) {
+		CallStoredProcedure proc = null;
+		List<String> oldPasswords = new ArrayList<>(count);
+		try
+		{
+			proc = new CallStoredProcedure("spFetchOldPassword(?, ?)");
+			proc.setParameter(1, id);
+			proc.setParameter(2, count);
+			ResultSet results = proc.executeWithResults();
+			if (null != results)
+			{
+				while (results.next())
+				{
+					 oldPasswords.add(results.getString(1));
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			// Logging needed.
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return oldPasswords;
 	}
 }
