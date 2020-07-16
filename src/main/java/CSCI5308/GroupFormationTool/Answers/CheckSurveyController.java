@@ -71,17 +71,17 @@ public class CheckSurveyController {
         IStudentSurvey studentSurvey=SystemConfig.instance().getStudentSurvey();
         IQuestion q=SystemConfig.instance().getQuestionService();
 
-        List<Question> questions=new ArrayList<>();      //list to contain all questions linked to survey
+        List<Question> questions = new ArrayList<>();      //list to contain all questions linked to survey
 
-        surveyid=studentSurvey.getSurveyIDfromCourse(storeval);    //load Survey ID by course ID
+        surveyid = studentSurvey.getSurveyIDfromCourse(storeval);    //load Survey ID by course ID
 
-        List<Long> questionID=q.loadQuestionIDbySurveyID(surveyid);   //Load list of question ID's linked to survey
+        List<Long> questionID = q.loadQuestionIDbySurveyID(surveyid);   //Load list of question ID's linked to survey
 
         for(long l:questionID)
         {
           questions.add(q.loadQuestionbyID(l));  //Store all question objects of one surveyID,in one list
         }
-
+        //PASS: serveyID to view and then fetch it.
         model.addAttribute("questions",questions);
 
 
@@ -110,7 +110,26 @@ public class CheckSurveyController {
         return "/survey/survey";
     }
 
-
+    /**
+     *  [
+     *      {
+     *          questionID:value,
+     *          questionTitle:value,
+     *          questionText:value
+     *          Answer:{
+     *              questionType:Number|text|multiple|checkbox,
+     *              multiple:[//load from db(multiple choice answers)]
+     *          },
+     *
+     *      },
+     *      {
+     *
+     *      },
+     *      {
+     *
+     *      }
+     *  ]
+     * */
 
     //store number answer
     @RequestMapping(value="/survey/survey/addAnswerNumber", method = RequestMethod.POST)
