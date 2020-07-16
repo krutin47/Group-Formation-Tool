@@ -1,13 +1,16 @@
 package CSCI5308.GroupFormationTool.AccessControl;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -36,6 +39,7 @@ public class UserDB implements IUserPersistence {
 				}
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			// Logging needed.
 		} finally {
 			if (null != proc) {
@@ -55,8 +59,10 @@ public class UserDB implements IUserPersistence {
 				while (results.next()) {
 					userID = results.getLong(1);
 				}
+				System.out.println("results ---> " + results.getRow());
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			// Logging needed.
 		} finally {
 			if (null != proc) {
@@ -102,14 +108,20 @@ public class UserDB implements IUserPersistence {
 		IUserPersistence iUserPersistence = SystemConfig.instance().getUserDB();
 		synchronized(this) {
 			User user = new User(bannerID, iUserPersistence);
-			System.out.println("forgotPassword -->" + bannerID);
+			System.out.println("forgotPassword --> " + bannerID);
+			System.out.println("USER ----> " + user);
+			System.out.println("USER.ID ----> " + user.getID());
 			try{
 				if (user.getID() > -1) {
 					String random = RandomStringUtils.randomAlphanumeric(10);
+					System.out.println("random String ----> " + random);
 					proc = new CallStoredProcedure("spForgotPasswordUser(?,?)");
 					proc.setParameter(1, user.getID());
 					proc.setParameter(2, random);
-					SystemConfig.instance().getMailUtil().sendmail(user.getEmail(), "password reset", "your password reset link is: localhost:8080/reset?_token=" + random + "&id=" + user.getID());
+					ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentRequestUri();
+					builder.scheme("https");
+					URI newUri = builder.build().toUri();
+					SystemConfig.instance().getMailUtil().sendmail(user.getEmail(), "password reset", "your password reset link is: " + newUri.getScheme() + "://" + newUri.getAuthority() + "/reset?_token=" + random + "&id=" + user.getID());
 					proc.execute();
 					return true;
 				}
@@ -127,7 +139,34 @@ public class UserDB implements IUserPersistence {
 	}
 
 	@Override
-	public boolean resetPassword(long id, String newPassword) {
-		return false;
+	public boolean resetPassword(long id, String newPassword, String _token) {
+		CallStoredProcedure proc = null;
+		IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+		try{
+			proc = new CallStoredProcedure("spFetchToken(?)");
+			proc.setParameter(1, id);
+			ResultSet resultSet = proc.executeWithResults();
+			if (null != resultSet) {
+				while (resultSet.next()) {
+					if (resultSet.getString(1).equals(_token)){
+						CallStoredProcedure Sproc = new CallStoredProcedure("spResetPassword");
+						Sproc.setParameter(1, id);
+						Sproc.setParameter(2, passwordEncryption.encryptPassword(newPassword));
+						Sproc.execute();
+					} else {
+						return false;
+					}
+				}
+				System.out.println("results ---> " + resultSet.getRow());
+			}
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (null != proc) {
+				proc.cleanup();
+			}
+		}
 	}
 }

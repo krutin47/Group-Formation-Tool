@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @Controller
 public class ForgotController {
@@ -25,11 +28,10 @@ public class ForgotController {
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
     public ModelAndView processForgotPassword(
             @RequestParam(name = USERNAME) String bannerID) {
-        System.out.println("here");
         boolean success = false;
+
         if (User.isBannerIDValid(bannerID)){
             IUserPersistence userDB = SystemConfig.instance().getUserDB();
-//            User user = new User(bannerID, userDB);
             success = userDB.forgotPassword(bannerID);
         }
         ModelAndView m;

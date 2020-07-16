@@ -49,11 +49,11 @@ public class UserDBMock implements IUserPersistence
 
 	@Override
 	public boolean forgotPassword(String bannerID) {
-		return false;
+		return true;
 	}
 
 	@Override
-	public boolean resetPassword(long id, String newPassword) {
-		return false;
+	public boolean resetPassword(long id, String newPassword, String token) {
+		return true;
 	}
 }

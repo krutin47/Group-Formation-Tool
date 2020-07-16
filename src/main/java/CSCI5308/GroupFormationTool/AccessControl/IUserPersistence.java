@@ -7,5 +7,5 @@ public interface IUserPersistence
 	public boolean createUser(User user);
 	public boolean updateUser(User user);
 	public boolean forgotPassword(String bannerID);
-	public boolean resetPassword(long id, String newPassword);
+	public boolean resetPassword(long id, String newPassword, String _token);
 }

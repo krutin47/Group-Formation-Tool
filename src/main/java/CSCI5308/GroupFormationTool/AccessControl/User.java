@@ -145,7 +145,7 @@ public class User
 		return userDB.updateUser(this);
 	}
 	
-	private static boolean isStringNullOrEmpty(String s)
+private static boolean isStringNullOrEmpty(String s)
 	{
 		if (null == s)
 		{
