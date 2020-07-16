@@ -8,6 +8,8 @@ import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.Courses.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,6 +36,8 @@ public class SystemConfig
 	private IQuestionType questionTypeService;
 	private Properties properties;
 	private IPasswordPolicies passwordPolicies;
+	private Logger LOG;
+
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -51,6 +55,9 @@ public class SystemConfig
 		questionTypeService = new QuestionTypeService();
 		properties = new Properties();
 		passwordPolicies = new DefaultPasswordPolicies();
+
+		LOG = LoggerFactory.getLogger(GroupFormationToolApplication.class);
+
 		String propertyFilePath = "src/main/resources/application.properties";
 		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
 			properties.load(in);
@@ -81,8 +88,10 @@ public class SystemConfig
 	public static SystemConfig instance() {
 		// Using lazy initialization, this is the one and only place that the System
 		// object will be instantiated.
+		System.out.println("uniqueInstance" + uniqueInstance);
 		if (null == uniqueInstance)
 		{
+			System.out.println("am i inside");
 			uniqueInstance = new SystemConfig();
 		}
 		return uniqueInstance;
@@ -152,5 +161,13 @@ public class SystemConfig
 
 	public void setQuestionTypeService(IQuestionType questionTypeService) {
 		this.questionTypeService = questionTypeService;
+	}
+
+	public Logger getLOG() {
+		return LOG;
+	}
+
+	public void setLOG(Logger LOG) {
+		this.LOG = LOG;
 	}
 }

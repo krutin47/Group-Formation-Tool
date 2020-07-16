@@ -8,7 +8,7 @@ public class BCryptPasswordEncryption implements IPasswordEncryption
 	
 	public BCryptPasswordEncryption()
 	{
-		encoder = new BCryptPasswordEncoder();
+//		encoder = new BCryptPasswordEncoder();
 	}
 	
 	public String encryptPassword(String rawPassword)

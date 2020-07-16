@@ -2,6 +2,8 @@ package CSCI5308.GroupFormationTool.Questions;
 
 import CSCI5308.GroupFormationTool.Database.CallQuery;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.SystemConfig;
+import org.slf4j.Logger;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -11,9 +13,15 @@ import java.util.List;
 
 public class QuestionService implements IQuestion {
 
+    private Logger LOG;
+
     @Override
     public boolean createMCQuestion(Question question) {
-        Boolean addQuestion = createSimpleQuestion(question);
+        LOG = SystemConfig.instance().getLOG();
+        LOG.info("In createMCQuestion method");
+
+        boolean addQuestion = createSimpleQuestion(question);
+        LOG.debug("Checking Question Added :: " + addQuestion);
 
         if (!addQuestion){
             return false;
@@ -21,6 +29,7 @@ public class QuestionService implements IQuestion {
 
         List<Choice> choices = question.getChoices();
         for (Choice option: choices){
+            LOG.info("Calling Stored Procedure");
             CallStoredProcedure callStoredProcedure = null;
             try {
                 callStoredProcedure = new CallStoredProcedure("spAddOptionForQuestion(?,?,?)");
@@ -29,11 +38,13 @@ public class QuestionService implements IQuestion {
                 callStoredProcedure.setParameter(3, question.getQuestionTitle());
                 callStoredProcedure.execute();
             } catch (SQLException e) {
+                LOG.error("sql query exception", e);
                 e.printStackTrace();
                 return false;
             }finally {
                 if (null != callStoredProcedure)
                 {
+                    LOG.info("calling cleanUp");
                     callStoredProcedure.cleanup();
                 }
             }
@@ -43,8 +54,12 @@ public class QuestionService implements IQuestion {
 
     @Override
     public boolean createSimpleQuestion(Question question) {
+        LOG = SystemConfig.instance().getLOG();
+        LOG.info("In createSimpleQuestion method");
+
         CallStoredProcedure callStoredProcedure = null;
         try{
+            LOG.info("Calling Stored Procedure");
             callStoredProcedure = new CallStoredProcedure("spCreateSimpleQuestion(?,?,?,?)");
             callStoredProcedure.setParameter(1, question.getQuestionTitle());
             callStoredProcedure.setParameter(2, question.getQuestionText());
@@ -52,11 +67,13 @@ public class QuestionService implements IQuestion {
             callStoredProcedure.setParameter(4, question.getBannerID());
             callStoredProcedure.execute();
         }catch (SQLException e){
+            LOG.error("sql query exception", e);
             e.printStackTrace();
             return false;
         }finally {
             if (null != callStoredProcedure)
             {
+                LOG.info("calling cleanUp");
                 callStoredProcedure.cleanup();
             }
         }
@@ -66,14 +83,17 @@ public class QuestionService implements IQuestion {
     @Override
     public List<Question> loadQuestionByInstID(long id)
     {
-        List<Question> questions = new ArrayList<Question>();
+        LOG = SystemConfig.instance().getLOG();
+        LOG.info("In loadQuestionByInstID method");
+
+        List<Question> questions = new ArrayList<>();
         CallQuery callquery = null;
         String query2="Select questionID, questionTitle, questionText, creationDate\r\n" +
                 "FROM Question \r\n" +
                 "where questionID IN (Select questionID from InstructorQuestionMapper where instructorID='"+id+"');";
 
-        try
-        {
+        try {
+            LOG.info("Performing query");
             callquery = new CallQuery(query2);
 
             ResultSet results = callquery.executeWithResults(query2);
@@ -81,8 +101,6 @@ public class QuestionService implements IQuestion {
             {
                 while (results.next())
                 {
-
-
                     long qid =results.getLong("questionID");
                     String title = results.getString("questionTitle");
                     String text = results.getString("questionText");
@@ -94,18 +112,18 @@ public class QuestionService implements IQuestion {
                     q.setCreationDate(date);
 
                     questions.add(q);
-
                 }
             }
         }
         catch (SQLException e)
         {
-            // Logging needed.
+            LOG.error("sql query exception", e);
         }
         finally
         {
             if (null != callquery)
             {
+                LOG.info("calling cleanUp");
                 callquery.cleanup();
             }
         }
@@ -117,7 +135,10 @@ public class QuestionService implements IQuestion {
     @Override
     public List<Question> loadQuestionByQID(long id)
     {
-        List<Question> questions = new ArrayList<Question>();
+        LOG = SystemConfig.instance().getLOG();
+        LOG.info("In loadQuestionByQID method");
+
+        List<Question> questions = new ArrayList<>();
         CallQuery callquery = null;
         String query2="Select questionID, questionTitle, questionText, creationDate\r\n" +
                 "FROM Question \r\n" +
@@ -125,6 +146,7 @@ public class QuestionService implements IQuestion {
 
         try
         {
+            LOG.info("Performing query");
             callquery = new CallQuery(query2);
 
             ResultSet results = callquery.executeWithResults(query2);
@@ -132,8 +154,6 @@ public class QuestionService implements IQuestion {
             {
                 while (results.next())
                 {
-
-
                     long qid =results.getLong("questionID");
                     String title = results.getString("questionTitle");
                     String text = results.getString("questionText");
@@ -145,18 +165,18 @@ public class QuestionService implements IQuestion {
                     q.setCreationDate(date);
 
                     questions.add(q);
-
                 }
             }
         }
         catch (SQLException e)
         {
-            // Logging needed.
+            LOG.error("sql query exception", e);
         }
         finally
         {
             if (null != callquery)
             {
+                LOG.info("calling cleanUp");
                 callquery.cleanup();
             }
         }
@@ -166,6 +186,9 @@ public class QuestionService implements IQuestion {
     @Override
     public boolean deleteQuestionById(long id)
     {
+        LOG = SystemConfig.instance().getLOG();
+        LOG.info("In deleteQuestionById method");
+
         CallQuery callquery1 = null;
         CallQuery callquery2 = null;
 
@@ -181,6 +204,7 @@ public class QuestionService implements IQuestion {
         String query4="DELETE FROM InstructorQuestionMapper\r\n" +
                 "    WHERE InstructorQuestionMapper.questionID = '"+id+"';";
         try{
+            LOG.info("Performing 4 queries");
             callquery4 = new CallQuery(query4);
             callquery4.executeUpdate(query4);
 
@@ -196,9 +220,10 @@ public class QuestionService implements IQuestion {
             callquery3.executeUpdate(query3);
 
         }catch (SQLException e) {
-            // Logging needed
+            LOG.error("sql query exception", e);
             return false;
         }finally {
+            LOG.info("calling cleanUp");
             if (null != callquery1) {
                 callquery1.cleanup();
             }

@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.Database;
 
+import CSCI5308.GroupFormationTool.SystemConfig;
+
 import java.sql.*;
 
 public class CallStoredProcedure
@@ -10,6 +12,7 @@ public class CallStoredProcedure
 	
 	public CallStoredProcedure(String storedProcedureName) throws SQLException
 	{
+		SystemConfig.instance().getLOG().info("In Constructor");
 		this.storedProcedureName = storedProcedureName;
 		connection = null;
 		statement = null;
@@ -31,6 +34,8 @@ public class CallStoredProcedure
 	{
 		try
 		{
+			SystemConfig.instance().getLOG().info("performing CleanUp");
+
 			if (null != statement)
 			{
 				statement.close();
@@ -45,7 +50,7 @@ public class CallStoredProcedure
 		}
 		catch (Exception e)
 		{
-			// Logging needed.
+			SystemConfig.instance().getLOG().error("Can not perform CleanUp");
 		}
 	}
 	

@@ -17,6 +17,7 @@ public class ConnectionManager
 	
 	public ConnectionManager()
 	{
+		SystemConfig.instance().getLOG().info("In default Constructor");
 		IDatabaseConfiguration config = SystemConfig.instance().getDatabaseConfiguration();
 		dbURL = config.getDatabaseURL();
 		dbUserName = config.getDatabaseUserName();

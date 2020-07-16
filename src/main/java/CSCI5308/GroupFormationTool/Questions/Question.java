@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.Questions;
 
+import CSCI5308.GroupFormationTool.SystemConfig;
+
 import java.sql.Date;
 import java.util.Comparator;
 import java.util.List;
@@ -19,6 +21,14 @@ public class Question implements Comparable<Question>{
     }
 
     public Question(String questionTitle, String questionText, String questionType, String bannerID, List<Choice> choices) {
+
+        SystemConfig.instance().getLOG().info("In Constructor with parameters");
+        SystemConfig.instance().getLOG().debug("Checking Parameter questionTitle :: " + questionTitle.isEmpty());
+        SystemConfig.instance().getLOG().debug("Checking Parameter questionText :: " + questionText.isEmpty());
+        SystemConfig.instance().getLOG().debug("Checking Parameter questionType :: " + questionType.isEmpty());
+        SystemConfig.instance().getLOG().debug("Checking Parameter bannerID :: " + bannerID.isEmpty());
+        SystemConfig.instance().getLOG().debug("Checking Parameter choices :: " + choices.isEmpty());
+
         this.questionTitle = questionTitle;
         this.questionText = questionText;
         this.questionType = questionType;

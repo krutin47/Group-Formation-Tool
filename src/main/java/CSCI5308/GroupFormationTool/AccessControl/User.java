@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import CSCI5308.GroupFormationTool.SystemConfig;
 
 public class User
 {
@@ -37,6 +38,7 @@ public class User
 	
 	public void setDefaults()
 	{
+		SystemConfig.instance().getLOG().info("setting Defaults to User");
 		id = -1;
 		password = "";
 		bannerID = "";
@@ -130,13 +132,22 @@ public class User
 		IPasswordEncryption passwordEncryption,
 		IUserNotifications notification)
 	{
+		SystemConfig.instance().getLOG().info("Creating new User");
+
 		String rawPassword = password;
 		this.password = passwordEncryption.encryptPassword(this.password);
+		SystemConfig.instance().getLOG().debug("Password Encrypted");
+
 		boolean success = userDB.createUser(this);
+
 		if (success && (null != notification))
 		{
+			SystemConfig.instance().getLOG().debug("New User Created");
 			notification.sendUserLoginCredentials(this, rawPassword);
+		} else {
+			SystemConfig.instance().getLOG().error("New User Creation failed");
 		}
+
 		return success;
 	}
 	
@@ -173,11 +184,14 @@ public class User
 	{
 		if (isStringNullOrEmpty(email))
 		{
+			SystemConfig.instance().getLOG().warn("Email Address null");
 			return false;
 		}
-		 
+
 		Pattern pattern = Pattern.compile(EMAIL_REGEX);
 		Matcher matcher = pattern.matcher(email);
+		SystemConfig.instance().getLOG().debug("Checking Email Address validation :: " + matcher.matches());
+
 		return matcher.matches();
 	}
 }
