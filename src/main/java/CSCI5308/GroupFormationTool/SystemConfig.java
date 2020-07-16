@@ -4,10 +4,7 @@ import CSCI5308.GroupFormationTool.Answers.AnswerDB;
 import CSCI5308.GroupFormationTool.Answers.IAnswer;
 import CSCI5308.GroupFormationTool.Answers.IStudentSurvey;
 import CSCI5308.GroupFormationTool.Answers.StudentSurveyDB;
-import CSCI5308.GroupFormationTool.Questions.IQuestion;
-import CSCI5308.GroupFormationTool.Questions.IQuestionType;
-import CSCI5308.GroupFormationTool.Questions.QuestionService;
-import CSCI5308.GroupFormationTool.Questions.QuestionTypeService;
+import CSCI5308.GroupFormationTool.Questions.*;
 import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
@@ -40,6 +37,8 @@ public class SystemConfig
 	private IPasswordPolicies passwordPolicies;
 	private IAnswer answerDB;
 	private IStudentSurvey studentSurvey;
+	private IChoice choice;
+
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -59,6 +58,7 @@ public class SystemConfig
 		properties = new Properties();
 		answerDB=new AnswerDB();
 		studentSurvey=new StudentSurveyDB();
+		choice=new ChoiceService();
 		String propertyFilePath = "src/main/resources/application.properties";
 		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
 			properties.load(in);
@@ -177,9 +177,15 @@ public class SystemConfig
 		return this.studentSurvey;
 	}
 
-	public void setStudentSurvey(IStudentSurvey studentSurvey)
+	public void setStudentSurvey(IStudentSurvey studentSurvey) { this.studentSurvey=studentSurvey; }
+
+	public IChoice getChoice()
 	{
-		this.studentSurvey=studentSurvey;
+		return this.choice;
 	}
 
-}
+	public void setChoice(IChoice choice) { this.choice=choice; }
+
+	}
+
+
