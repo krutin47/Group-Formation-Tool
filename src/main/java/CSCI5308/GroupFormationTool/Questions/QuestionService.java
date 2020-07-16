@@ -223,8 +223,8 @@ public class QuestionService implements IQuestion {
     @Override
     public Question loadQuestionbyQid(long id)
 	{
-Question ques=new Question();
-CallStoredProcedure proc = null;
+    Question ques=new Question();
+    CallStoredProcedure proc = null;
 		try
 		{
 			proc = new CallStoredProcedure("spLoadQuestionByQid(?)");
@@ -234,12 +234,10 @@ CallStoredProcedure proc = null;
 			{
 				while (results.next())
 				{
-					
 					long qid =results.getLong("questionID");
                     String title = results.getString("questionTitle");
                     String text = results.getString("questionText");
                     Date date=results.getDate("creationDate");
-                   // Question q = new Question();
                     ques.setQuestionID(qid);
                     ques.setQuestionTitle(title);
                     ques.setQuestionText(text);
