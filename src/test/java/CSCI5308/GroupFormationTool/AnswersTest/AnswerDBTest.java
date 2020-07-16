@@ -15,13 +15,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AnswerDBTest implements IAnswer {
 
 
-    @Override
     public boolean createAnswer(Answer answer, long surveyID, long QuestionID, long userID) {
-        return false;
+        Answer ans=new Answer();
+        ans.setAnswerValue("temp");
+        ans.setAnswerID(0);
+        return true;
     }
 
-    @Override
+
     public String loadAnswerbyID(long ID) {
-        return null;
+        Answer ans=new Answer();
+        ans.setAnswerID(ID);
+        return ans.getAnswerValue();
     }
 }

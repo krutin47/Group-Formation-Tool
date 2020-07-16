@@ -20,14 +20,53 @@
 </div>
 <h1>Survey Exists</h1>
 
-<tr th:each="questions: ${questions}">
-    <div th:switch="${questions.typeID}">
-        <p th:case="Numeric">
-        </p>
+<table  border="1" style="width:300px">
+    <tr>
+        <th>Question Title</th>
+        <th>Question Text</th>
+        <th>Answer</th>
+    </tr>
 
-    </div>
+    <tr th:each="question : ${questions}">
+        <td th:text="${question.questionTitle}"></td>
+        <td th:text="${question.questionText}"></td>
 
-</tr>
+        <div th:if="${displayNum}">
+           <td>
+               <form th:action="@{/survey/survey/addAnswerNumber(id=${question.questionID})}" method="post">
+                   <div><label> Enter Number: <input type="text" name="answer"/> </label></div>
+               </form>
+           </td>
+        </div>
 
+        <div th:if="${displayMul1}">
+            <td>
+                <form th:action="@{/survey/survey/addAnswerMul1(id=${question.questionID})}" method="post">
+                    <div><label> Enter Answer: <input type="dropdown" name="answer"/> </label></div>
+                </form>
+            </td>
+        </div>
+        <div th:if="${displayMul2}">
+            <td>
+                <form th:action="@{/survey/survey/addAnswerMul2(id=${question.questionID})}" method="post">
+                    <div><label> Enter Answer: <input type="checkbox" name="answer"/> </label></div>
+                </form>
+            </td>
+        </div>
+        <div th:if="${displayFree}">
+            <td>
+                <form th:action="@{/survey/survey/addAnswerFree(id=${question.questionID})}" method="post">
+                    <div><label> Enter Text: <input type="text" name="answer"/> </label></div>
+                </form>
+            </td>
+        </div>
+    </tr>
+
+
+
+</table>
+    <button type="submit">Submit</button>
+
+</form>
 </body>
 </html>

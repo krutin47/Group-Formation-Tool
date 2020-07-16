@@ -3,7 +3,6 @@ package CSCI5308.GroupFormationTool.Answers;
 import CSCI5308.GroupFormationTool.Courses.Course;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 import CSCI5308.GroupFormationTool.Questions.Question;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
