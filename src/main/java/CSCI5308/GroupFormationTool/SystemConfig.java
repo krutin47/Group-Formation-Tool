@@ -22,6 +22,7 @@ public class SystemConfig
 	
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
+	private IUserNotifications userNotifications;
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
@@ -36,6 +37,7 @@ public class SystemConfig
 		// setup logic when necessary.
 		passwordEncryption = new BCryptPasswordEncryption();
 		userDB = new UserDB();
+		userNotifications = new UserNotifications();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
@@ -110,5 +112,13 @@ public class SystemConfig
 
 	public void setMailUtil(IEmail mailUtil) {
 		this.mailUtil = mailUtil;
+	}
+
+	public IUserNotifications getUserNotifications() {
+		return userNotifications;
+	}
+
+	public void setUserNotifications(IUserNotifications userNotifications) {
+		this.userNotifications = userNotifications;
 	}
 }
