@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Questions;
 
+import CSCI5308.GroupFormationTool.Courses.Course;
 import CSCI5308.GroupFormationTool.Database.CallQuery;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
@@ -63,6 +64,7 @@ public class QuestionService implements IQuestion {
         return true;
     }
 
+   
     @Override
     public List<Question> loadQuestionByInstID(long id)
     {
@@ -217,4 +219,92 @@ public class QuestionService implements IQuestion {
         }
         return true;
     }
+    
+    @Override
+    public Question loadQuestionbyQid(long id)
+	{
+Question ques=new Question();
+CallStoredProcedure proc = null;
+		try
+		{
+			proc = new CallStoredProcedure("spLoadQuestionByQid(?)");
+			proc.setParameter(1, id);
+			ResultSet results = proc.executeWithResults();
+			if (null != results)
+			{
+				while (results.next())
+				{
+					
+					long qid =results.getLong("questionID");
+                    String title = results.getString("questionTitle");
+                    String text = results.getString("questionText");
+                    Date date=results.getDate("creationDate");
+                   // Question q = new Question();
+                    ques.setQuestionID(qid);
+                    ques.setQuestionTitle(title);
+                    ques.setQuestionText(text);
+                    ques.setCreationDate(date);
+
+				}
+			}
+			
+		}
+		catch (SQLException e)
+		{
+			// Logging needed.
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return ques;
+	}
+    
+    @Override
+    public List<Question> loadInstructorQuestionsList(long courseID)
+	{
+		List<Question> questions = new ArrayList<Question>();
+		CallStoredProcedure proc = null;
+		try
+		{
+			proc = new CallStoredProcedure("spLoadInstructorQuestionsList(?)");
+            proc.setParameter(1, courseID);
+
+			ResultSet results = proc.executeWithResults();
+			if (null != results)
+			{
+				while (results.next())
+				{
+					long questionID = results.getLong(1);
+					String questionTitle = results.getString(2);
+					String questionText = results.getString(3);
+					Date creationDate = results.getDate(4);
+
+					Question q = new Question();
+					q.setQuestionID(questionID);
+					q.setQuestionTitle(questionTitle);
+					q.setQuestionText(questionText);
+					q.setCreationDate(creationDate);
+
+					questions.add(q);
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			// Logging needed.
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return questions;
+	}
+
 }
