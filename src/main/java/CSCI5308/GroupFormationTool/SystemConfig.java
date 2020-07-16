@@ -8,6 +8,7 @@ import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.Courses.*;
+import CSCI5308.GroupFormationTool.Survey.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class SystemConfig
 	private IQuestionType questionTypeService;
 	private Properties properties;
 	private IPasswordPolicies passwordPolicies;
+	private ISurveyDB surveyDB;
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -49,6 +51,7 @@ public class SystemConfig
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
 		questionService = new QuestionService();
 		questionTypeService = new QuestionTypeService();
+		surveyDB = new SurveyDB(); 
 		properties = new Properties();
 		passwordPolicies = new DefaultPasswordPolicies();
 		String propertyFilePath = "src/main/resources/application.properties";
@@ -152,5 +155,12 @@ public class SystemConfig
 
 	public void setQuestionTypeService(IQuestionType questionTypeService) {
 		this.questionTypeService = questionTypeService;
+	}
+	public ISurveyDB getSurveyDB() {
+		return surveyDB;
+	}
+	
+	public void setSurveyDB(ISurveyDB surveyDB) {
+		this.surveyDB = surveyDB;
 	}
 }
