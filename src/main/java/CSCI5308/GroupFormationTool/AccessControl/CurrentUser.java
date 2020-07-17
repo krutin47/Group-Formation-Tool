@@ -50,4 +50,7 @@ public class CurrentUser
 		}
 		return null;
 	}
+
+
+
 }

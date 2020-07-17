@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div><a href="/">Go to Home Page</a></div>
+<div style="margin-top:40px; margin-left: 10px; position:relative;" align="left">
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+</div>
+<h1>Survey Exists</h1>
+
+<tr th:each="questions: ${questions}">
+    <div th:switch="${questions.typeID}">
+        <p th:case="Numeric">
+        </p>
+
+    </div>
+
+</tr>
+
+</body>
+</html>

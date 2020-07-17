@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Questions;
 
+import CSCI5308.GroupFormationTool.Courses.Course;
 import CSCI5308.GroupFormationTool.Database.CallQuery;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 import CSCI5308.GroupFormationTool.SystemConfig;
@@ -241,5 +242,79 @@ public class QuestionService implements IQuestion {
             }
         }
         return true;
+    }
+
+
+//Load all question ID's linked to a survey
+    public List<Long> loadQuestionIDbySurveyID(long SurveyID) {
+
+        List<Long> questions = new ArrayList<Long>();
+        CallStoredProcedure proc = null;
+        try
+        {
+            proc = new CallStoredProcedure("spLoadQuestionsbySurveyID(?)");
+            proc.setParameter(1, SurveyID);
+            ResultSet results = proc.executeWithResults();
+            if (null != results)
+            {
+                while (results.next())
+                {
+                    long qid =results.getLong("questionID");
+                    questions.add(qid);
+
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            // Logging needed.
+        }
+        finally
+        {
+            if (null != proc)
+            {
+                proc.cleanup();
+            }
+        }
+        return questions;
+    }
+
+
+
+
+    public Question loadQuestionbyID(long id)
+    {
+        Question q=new Question();
+        CallStoredProcedure proc = null;
+        try
+        {
+            proc = new CallStoredProcedure("spLoadQuestionbyID(?)");
+            proc.setParameter(1, id);
+            ResultSet results = proc.executeWithResults();
+            if (null != results)
+            {
+                long qid =results.getLong("questionID");
+                String title = results.getString("questionTitle");
+                String text = results.getString("questionText");
+                Date date=results.getDate("creationDate");
+                q.setQuestionID(qid);
+                q.setQuestionTitle(title);
+                q.setQuestionText(text);
+                q.setCreationDate(date);
+            }
+        }
+        catch (SQLException e)
+        {
+            // Logging needed.
+        }
+        finally
+        {
+            if (null != proc)
+            {
+                proc.cleanup();
+            }
+        }
+        return q;
+
     }
 }

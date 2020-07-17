@@ -66,13 +66,13 @@ public class SignupController
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public ModelAndView processSignup(
-			@RequestParam(name = USERNAME) String bannerID,
-			@RequestParam(name = PASSWORD) String password,
-			@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
-			@RequestParam(name = FIRST_NAME) String firstName,
-			@RequestParam(name = LAST_NAME) String lastName,
-			@RequestParam(name = EMAIL) String email)
+   	public ModelAndView processSignup(
+   		@RequestParam(name = USERNAME) String bannerID,
+   		@RequestParam(name = PASSWORD) String password,
+   		@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
+   		@RequestParam(name = FIRST_NAME) String firstName,
+   		@RequestParam(name = LAST_NAME) String lastName,
+   		@RequestParam(name = EMAIL) String email)
 	{
 		boolean success = false;
 		ModelAndView m;
@@ -214,10 +214,10 @@ public class SignupController
 
 		SystemConfig.instance().getLOG().info("No Error in the Password input");
 		if (User.isBannerIDValid(bannerID) &&
-				User.isEmailValid(email) &&
-				User.isFirstNameValid(firstName) &&
-				User.isLastNameValid(lastName) &&
-				password.equals(passwordConfirm))
+			 User.isEmailValid(email) &&
+			 User.isFirstNameValid(firstName) &&
+			 User.isLastNameValid(lastName) &&
+			 password.equals(passwordConfirm))
 		{
 			SystemConfig.instance().getLOG().info("Creating a new User");
 			User u = new User();

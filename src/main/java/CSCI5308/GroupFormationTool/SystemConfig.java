@@ -22,6 +22,15 @@ import CSCI5308.GroupFormationTool.Utils.IEmail;
 import CSCI5308.GroupFormationTool.Utils.MailUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import CSCI5308.GroupFormationTool.Answers.AnswerDB;
+import CSCI5308.GroupFormationTool.Answers.IAnswer;
+import CSCI5308.GroupFormationTool.Answers.IStudentSurvey;
+import CSCI5308.GroupFormationTool.Answers.StudentSurveyDB;
+import CSCI5308.GroupFormationTool.Questions.*;
+import CSCI5308.GroupFormationTool.Security.*;
+import CSCI5308.GroupFormationTool.AccessControl.*;
+import CSCI5308.GroupFormationTool.Database.*;
+import CSCI5308.GroupFormationTool.Courses.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -53,6 +62,10 @@ public class SystemConfig
 	private IEmail mailUtil;
 	private Logger LOG;
 
+	private IAnswer answerDB;
+	private IStudentSurvey studentSurvey;
+	private IChoice choice;
+
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -69,11 +82,14 @@ public class SystemConfig
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
 		questionService = new QuestionService();
 		questionTypeService = new QuestionTypeService();
-		properties = new Properties();
 		passwordPolicies = new DefaultPasswordPolicies();
 
 		LOG = LoggerFactory.getLogger(GroupFormationToolApplication.class);
 
+		properties = new Properties();
+		answerDB=new AnswerDB();
+		studentSurvey=new StudentSurveyDB();
+		choice=new ChoiceService();
 		String propertyFilePath = "src/main/resources/application.properties";
 		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
 			properties.load(in);
@@ -202,3 +218,25 @@ public class SystemConfig
 		this.LOG = LOG;
 	}
 }
+
+	public IAnswer getAnswerDB()
+	{
+		return answerDB;
+	}
+
+	public void setAnswerDB(IAnswer answerDB)
+	{
+		this.answerDB=answerDB;
+	}
+
+	public IStudentSurvey getStudentSurvey()
+	{
+		return this.studentSurvey;
+	}
+
+	public void setStudentSurvey(IStudentSurvey studentSurvey) { this.studentSurvey=studentSurvey; }
+
+	public IChoice getChoice()
+	{
+		return this.choice;
+	}
