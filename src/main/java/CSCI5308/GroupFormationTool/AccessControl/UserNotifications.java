@@ -11,11 +11,11 @@ public class UserNotifications implements IUserNotifications {
         try {
             SystemConfig.instance().getMailUtil().sendmail(user.getEmail(), "Welcome to Online student portal",
                     "<h1>Greetings!!!</h1>" +
-                            "<p>your have granted access to the Online Student Portal.</p>" +
+                            "<p>you have granted access to the Online Student Portal.</p>" +
                             "<p>Here are your credentials:</p><br>" +
-                            "<strong>Banner ID: </strong>" + user.getID() +
-                            "<strong>Password: </strong>" + rawPassword +
-                            "<br><br>" +
+                            "<p><strong>Banner ID: </strong>" + user.getBannerID() +
+                            "</p><p><strong>Password: </strong>" + rawPassword +
+                            "</p><br>" +
                             "<p>We will see you soon... Have a grate Day!!</p>");
         } catch (MessagingException | IOException e) {
             e.printStackTrace();

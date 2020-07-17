@@ -149,7 +149,7 @@ public class UserDB implements IUserPersistence {
 			if (null != resultSet) {
 				while (resultSet.next()) {
 					if (resultSet.getString(1).equals(_token)){
-						CallStoredProcedure Sproc = new CallStoredProcedure("spResetPassword");
+						CallStoredProcedure Sproc = new CallStoredProcedure("spResetPassword(?,?)");
 						Sproc.setParameter(1, id);
 						Sproc.setParameter(2, passwordEncryption.encryptPassword(newPassword));
 						Sproc.execute();

@@ -48,6 +48,7 @@ public class StudentCSVImport
 				user.setFirstName(firstName);
 				user.setLastName(lastName);
 				user.setEmail(email);
+				user.setPassword(bannerID);
 				if (user.createUser(userDB, passwordEncryption, userNotifications))
 				{
 					successResults.add("Created: " + userDetails);
