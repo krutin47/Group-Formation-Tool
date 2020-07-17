@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.Questions;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.SystemConfig;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,10 +12,14 @@ public class QuestionTypeService implements IQuestionType{
     @Override
     public List<QuestionType> loadAllQuestionTypes() {
 
-        List<QuestionType> questionTypeList = new ArrayList<QuestionType>();
+        SystemConfig.instance().getLOG().info("In loadAllQuestionTypes method");
 
+        List<QuestionType> questionTypeList = new ArrayList<>();
         CallStoredProcedure storedProcedure = null;
+
         try{
+            SystemConfig.instance().getLOG().info("Calling Stored Procedure");
+
             storedProcedure = new CallStoredProcedure("spLoadAllQuestionTypes()");
             ResultSet resultSet = storedProcedure.executeWithResults();
 
@@ -25,12 +30,15 @@ public class QuestionTypeService implements IQuestionType{
                     QuestionType questionType = new QuestionType(id, type);
                     questionTypeList.add(questionType);
                 }
+                SystemConfig.instance().getLOG().debug("Fetched ResultSet records :: " + resultSet.getRow());
             }
 
         } catch (SQLException e) {
-            //e.printStackTrace();
+            SystemConfig.instance().getLOG().error("SQL query error", e);
+            e.printStackTrace();
         } finally {
             if (null != storedProcedure){
+                SystemConfig.instance().getLOG().info("cleaningUp resources");
                 storedProcedure.cleanup();
             }
         }

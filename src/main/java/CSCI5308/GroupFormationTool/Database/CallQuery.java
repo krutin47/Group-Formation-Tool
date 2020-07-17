@@ -1,4 +1,6 @@
 package CSCI5308.GroupFormationTool.Database;
+import CSCI5308.GroupFormationTool.SystemConfig;
+
 import java.sql.*;
 
 public class CallQuery {
@@ -8,6 +10,7 @@ public class CallQuery {
 
     public CallQuery(String query) throws SQLException
     {
+        SystemConfig.instance().getLOG().info("In Constructor");
         this.query = query;
         connection = null;
         statement = null;
@@ -29,6 +32,7 @@ public class CallQuery {
     {
         try
         {
+            SystemConfig.instance().getLOG().info("performing CleanUp");
             if (null != statement)
             {
                 statement.close();
@@ -43,20 +47,20 @@ public class CallQuery {
         }
         catch (Exception e)
         {
-            // Logging needed.
+            SystemConfig.instance().getLOG().error("Can not perform CleanUp");
         }
     }
 
     public ResultSet executeWithResults(String query) throws SQLException
     {
+        SystemConfig.instance().getLOG().debug("checking parameter is not null ::" + query.isEmpty());
         if (statement.execute(query))
         {
-            System.out.println("Executed");
+            SystemConfig.instance().getLOG().info("Query Executed");
             return statement.getResultSet();
         }
         else {
-            System.out.println("Not Executed");
-
+            SystemConfig.instance().getLOG().warn("Not Executed");
         }
         return null;
     }
@@ -68,7 +72,6 @@ public class CallQuery {
     public void executeUpdate(String query) throws SQLException
     {
         statement.executeUpdate(query);
-
     }
 }
 

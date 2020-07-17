@@ -1,15 +1,5 @@
 package CSCI5308.GroupFormationTool;
 
-import CSCI5308.GroupFormationTool.AccessControl.IUserNotifications;
-import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
-import CSCI5308.GroupFormationTool.AccessControl.UserDB;
-import CSCI5308.GroupFormationTool.AccessControl.UserNotifications;
-import CSCI5308.GroupFormationTool.Courses.CourseDB;
-import CSCI5308.GroupFormationTool.Courses.CourseUserRelationshipDB;
-import CSCI5308.GroupFormationTool.Courses.ICoursePersistence;
-import CSCI5308.GroupFormationTool.Courses.ICourseUserRelationshipPersistence;
-import CSCI5308.GroupFormationTool.Database.DefaultDatabaseConfiguration;
-import CSCI5308.GroupFormationTool.Database.IDatabaseConfiguration;
 import CSCI5308.GroupFormationTool.Questions.IQuestion;
 import CSCI5308.GroupFormationTool.Questions.IQuestionType;
 import CSCI5308.GroupFormationTool.Questions.QuestionService;
@@ -20,6 +10,8 @@ import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 import CSCI5308.GroupFormationTool.Security.IPasswordPolicies;
 import CSCI5308.GroupFormationTool.Utils.IEmail;
 import CSCI5308.GroupFormationTool.Utils.MailUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -37,7 +29,7 @@ import java.util.Properties;
 public class SystemConfig
 {
 	private static SystemConfig uniqueInstance = null;
-	
+
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
 	private IUserNotifications userNotifications;
@@ -49,6 +41,9 @@ public class SystemConfig
 	private Properties properties;
 	private IPasswordPolicies passwordPolicies;
 	private IEmail mailUtil;
+	private Logger LOG;
+
+
 
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
@@ -66,6 +61,9 @@ public class SystemConfig
 		questionTypeService = new QuestionTypeService();
 		properties = new Properties();
 		passwordPolicies = new DefaultPasswordPolicies();
+
+		LOG = LoggerFactory.getLogger(GroupFormationToolApplication.class);
+
 		String propertyFilePath = "src/main/resources/application.properties";
 		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
 			properties.load(in);
@@ -120,6 +118,7 @@ public class SystemConfig
 	}
 
 	public void setUserDB(IUserPersistence userDB)
+
 	{
 		this.userDB = userDB;
 	}
@@ -183,5 +182,13 @@ public class SystemConfig
 
 	public void setUserNotifications(IUserNotifications userNotifications) {
 		this.userNotifications = userNotifications;
+	}
+
+	public Logger getLOG() {
+		return LOG;
+	}
+
+	public void setLOG(Logger LOG) {
+		this.LOG = LOG;
 	}
 }

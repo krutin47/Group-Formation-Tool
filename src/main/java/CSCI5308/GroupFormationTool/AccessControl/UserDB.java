@@ -13,14 +13,24 @@ import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import CSCI5308.GroupFormationTool.SystemConfig;
+import org.slf4j.Logger;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
 public class UserDB implements IUserPersistence {
-	public void loadUserByID(long id, User user) {
+
+	private Logger LOG;
+
+	public void loadUserByID(long id, User user)
+	{
+		LOG = SystemConfig.instance().getLOG();
+		LOG.info("In loadUserByID method");
 		CallStoredProcedure proc = null;
-		try {
+		try
+		{
+			LOG.info("calling stored Procedure");
 			proc = new CallStoredProcedure("spLoadUser(?)");
 			proc.setParameter(1, id);
 			ResultSet results = proc.executeWithResults();
@@ -39,21 +49,39 @@ public class UserDB implements IUserPersistence {
 					user.setLastName(lastName);
 					user.setEmail(email);
 				}
+				LOG.debug("Fetched ResultSet records :: " + results.getRow());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Logging needed.
 		} finally {
 			if (null != proc) {
+		}
+		catch (SQLException e)
+		{
+			LOG.error("Error in sql query", e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				LOG.info("cleaning up the resources.");
 				proc.cleanup();
 			}
 		}
 	}
 
 	public void loadUserByBannerID(String bannerID, User user) {
+	public void loadUserByBannerID(String bannerID, User user)
+	{
+		LOG = SystemConfig.instance().getLOG();
+		LOG.info("In loadUserByBannerID method");
 		CallStoredProcedure proc = null;
 		long userID = -1;
 		try {
+		try
+		{
+			LOG.info("calling stored Procedure");
 			proc = new CallStoredProcedure("spFindUserByBannerID(?)");
 			proc.setParameter(1, bannerID);
 			ResultSet results = proc.executeWithResults();
@@ -62,24 +90,41 @@ public class UserDB implements IUserPersistence {
 					userID = results.getLong(1);
 				}
 				System.out.println("results ---> " + results.getRow());
+				LOG.debug("Fetched ResultSet records :: " + results.getRow());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Logging needed.
 		} finally {
 			if (null != proc) {
+		}
+		catch (SQLException e)
+		{
+			LOG.error("Error in sql query", e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				LOG.info("cleaning up the resources.");
 				proc.cleanup();
 			}
 		}
 		// If we found the ID load the full details.
 		if (userID > -1) {
+			LOG.info("Calling the loadUserByID method to Load the User");
 			loadUserByID(userID, user);
 		}
 	}
 
 	public boolean createUser(User user) {
+		LOG = SystemConfig.instance().getLOG();
+		LOG.info("In createUser method");
 		CallStoredProcedure proc = null;
 		try {
+		try
+		{
+			LOG.info("calling stored Procedure");
 			proc = new CallStoredProcedure("spCreateUser(?, ?, ?, ?, ?, ?)");
 			proc.setParameter(1, user.getBannerID());
 			proc.setParameter(2, user.getPassword());
@@ -90,9 +135,19 @@ public class UserDB implements IUserPersistence {
 			proc.execute();
 		} catch (SQLException e) {
 			// Logging needed
+		}
+		catch (SQLException e)
+		{
+			LOG.error("Error in sql query", e);
 			return false;
 		} finally {
 			if (null != proc) {
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				LOG.info("cleaning up the resources.");
 				proc.cleanup();
 			}
 		}
@@ -106,10 +161,14 @@ public class UserDB implements IUserPersistence {
 
 	@Override
 	public List<String> fetchOldPasswords(long id, int count) {
+		LOG = SystemConfig.instance().getLOG();
+		LOG.info("In fetchOldPasswords method");
+
 		CallStoredProcedure proc = null;
 		List<String> oldPasswords = new ArrayList<>(count);
 		try
 		{
+			LOG.info("calling stored Procedure");
 			proc = new CallStoredProcedure("spFetchOldPassword(?, ?)");
 			proc.setParameter(1, id);
 			proc.setParameter(2, count);
@@ -120,16 +179,18 @@ public class UserDB implements IUserPersistence {
 				{
 					 oldPasswords.add(results.getString(1));
 				}
+				LOG.debug("Fetched ResultSet records :: " + results.getRow());
 			}
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			LOG.error("Error in sql query", e);
 		}
 		finally
 		{
 			if (null != proc)
 			{
+				LOG.info("cleaning up the resources.");
 				proc.cleanup();
 			}
 		}
