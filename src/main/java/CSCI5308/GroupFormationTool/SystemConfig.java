@@ -1,13 +1,25 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.AccessControl.IUserNotifications;
+import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
+import CSCI5308.GroupFormationTool.AccessControl.UserDB;
+import CSCI5308.GroupFormationTool.AccessControl.UserNotifications;
+import CSCI5308.GroupFormationTool.Courses.CourseDB;
+import CSCI5308.GroupFormationTool.Courses.CourseUserRelationshipDB;
+import CSCI5308.GroupFormationTool.Courses.ICoursePersistence;
+import CSCI5308.GroupFormationTool.Courses.ICourseUserRelationshipPersistence;
+import CSCI5308.GroupFormationTool.Database.DefaultDatabaseConfiguration;
+import CSCI5308.GroupFormationTool.Database.IDatabaseConfiguration;
 import CSCI5308.GroupFormationTool.Questions.IQuestion;
 import CSCI5308.GroupFormationTool.Questions.IQuestionType;
 import CSCI5308.GroupFormationTool.Questions.QuestionService;
 import CSCI5308.GroupFormationTool.Questions.QuestionTypeService;
-import CSCI5308.GroupFormationTool.Security.*;
-import CSCI5308.GroupFormationTool.AccessControl.*;
-import CSCI5308.GroupFormationTool.Database.*;
-import CSCI5308.GroupFormationTool.Courses.*;
+import CSCI5308.GroupFormationTool.Security.BCryptPasswordEncryption;
+import CSCI5308.GroupFormationTool.Security.DefaultPasswordPolicies;
+import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import CSCI5308.GroupFormationTool.Security.IPasswordPolicies;
+import CSCI5308.GroupFormationTool.Utils.IEmail;
+import CSCI5308.GroupFormationTool.Utils.MailUtil;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,8 +37,10 @@ import java.util.Properties;
 public class SystemConfig
 {
 	private static SystemConfig uniqueInstance = null;
+	
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
+	private IUserNotifications userNotifications;
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
@@ -34,7 +48,7 @@ public class SystemConfig
 	private IQuestionType questionTypeService;
 	private Properties properties;
 	private IPasswordPolicies passwordPolicies;
-
+	private IEmail mailUtil;
 
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
@@ -44,6 +58,7 @@ public class SystemConfig
 		// setup logic when necessary.
 		passwordEncryption = new BCryptPasswordEncryption();
 		userDB = new UserDB();
+		userNotifications = new UserNotifications();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
@@ -58,6 +73,7 @@ public class SystemConfig
 			e.printStackTrace();
 		}
 
+		mailUtil = new MailUtil();
 	}
 
 	public IPasswordPolicies getPasswordPolicies() {
@@ -104,7 +120,6 @@ public class SystemConfig
 	}
 
 	public void setUserDB(IUserPersistence userDB)
-
 	{
 		this.userDB = userDB;
 	}
@@ -152,5 +167,21 @@ public class SystemConfig
 
 	public void setQuestionTypeService(IQuestionType questionTypeService) {
 		this.questionTypeService = questionTypeService;
+	}
+
+	public IEmail getMailUtil() {
+		return mailUtil;
+	}
+
+	public void setMailUtil(IEmail mailUtil) {
+		this.mailUtil = mailUtil;
+	}
+
+	public IUserNotifications getUserNotifications() {
+		return userNotifications;
+	}
+
+	public void setUserNotifications(IUserNotifications userNotifications) {
+		this.userNotifications = userNotifications;
 	}
 }
