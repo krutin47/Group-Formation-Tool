@@ -87,90 +87,42 @@ public class QuestionService implements IQuestion {
         LOG = SystemConfig.instance().getLOG();
         LOG.info("In loadQuestionByInstID method");
 
-        List<Question> questions = new ArrayList<>();
-        CallQuery callquery = null;
-        String query2="Select questionID, questionTitle, questionText, creationDate\r\n" +
-                "FROM Question \r\n" +
-                "where questionID IN (Select questionID from InstructorQuestionMapper where instructorID='"+id+"');";
-
-        try {
+        List<Question> questions = new ArrayList<Question>();
+        CallStoredProcedure proc = null;
+        try
+        {
             LOG.info("Performing query");
-            callquery = new CallQuery(query2);
-	public List<Question> loadQuestionByInstID(long id)
-	{
-		List<Question> questions = new ArrayList<Question>();
-		CallStoredProcedure proc = null;
-		try
-		{
-			proc = new CallStoredProcedure("sploadQuestionByInstID(?)");
-			proc.setParameter(1, id);
+            proc = new CallStoredProcedure("sploadQuestionByInstID(?)");
+            proc.setParameter(1, id);
 
-            ResultSet results = callquery.executeWithResults(query2);
+            ResultSet results = proc.executeWithResults();
             if (null != results)
             {
                 while (results.next())
                 {
-                    long qid =results.getLong("questionID");
-                    String title = results.getString("questionTitle");
-                    String text = results.getString("questionText");
-                    Date date=results.getDate("creationDate");
-                    Question q = new Question();
-                    q.setQuestionID(qid);
-                    q.setQuestionTitle(title);
-                    q.setQuestionText(text);
-                    q.setCreationDate(date);
+                    long questionID = results.getLong(1);
+                    String questionTitle = results.getString(2);
+                    String questionText = results.getString(3);
+                    Date creationDate = results.getDate(4);
 
+                    Question q = new Question();
+                    q.setQuestionID(questionID);
+                    q.setQuestionTitle(questionTitle);
+                    q.setQuestionText(questionText);
+                    q.setCreationDate(creationDate);
                     questions.add(q);
                 }
             }
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             LOG.error("sql query exception", e);
-        }
-        finally
-        {
-            if (null != callquery)
-            {
+        } finally {
+            if (null != proc) {
                 LOG.info("calling cleanUp");
-                callquery.cleanup();
+                proc.cleanup();
             }
         }
-        return questions;   //returns the list of questions found
-
-			ResultSet results = proc.executeWithResults();
-			if (null != results)
-			{
-				while (results.next())
-				{
-					long questionID = results.getLong(1);
-					String questionTitle = results.getString(2);
-					String questionText = results.getString(3);
-					Date creationDate = results.getDate(4);
-
-					Question q = new Question();
-					q.setQuestionID(questionID);
-					q.setQuestionTitle(questionTitle);
-					q.setQuestionText(questionText);
-					q.setCreationDate(creationDate);
-					questions.add(q);
-				}
-			}
-		}
-		catch (SQLException e)
-		{
-			// Logging needed.
-		}
-		finally
-		{
-			if (null != proc)
-			{
-				proc.cleanup();
-			}
-		}
-		return questions;
-	}
-
+        return questions;
+    }
 
     @Override
     public List<Question> loadQuestionByQID(long id)
@@ -178,42 +130,31 @@ public class QuestionService implements IQuestion {
         LOG = SystemConfig.instance().getLOG();
         LOG.info("In loadQuestionByQID method");
 
-        List<Question> questions = new ArrayList<>();
-        CallQuery callquery = null;
-        String query2="Select questionID, questionTitle, questionText, creationDate\r\n" +
-                "FROM Question \r\n" +
-                "where questionID='"+id+"';";
-
+        List<Question> questions = new ArrayList<Question>();
+        CallStoredProcedure proc = null;
         try
         {
+            proc = new CallStoredProcedure("sploadQuestionByQuestionID(?)");
+            proc.setParameter(1, id);
             LOG.info("Performing query");
-            callquery = new CallQuery(query2);
-   	public List<Question> loadQuestionByQID(long id)
-   	{
-   		List<Question> questions = new ArrayList<Question>();
-   		CallStoredProcedure proc = null;
-   		try
-   		{
-   			proc = new CallStoredProcedure("sploadQuestionByQuestionID(?)");
-   			proc.setParameter(1, id);
-
-            ResultSet results = callquery.executeWithResults(query2);
+            ResultSet results = proc.executeWithResults();
             if (null != results)
             {
                 while (results.next())
                 {
-                    long qid =results.getLong("questionID");
-                    String title = results.getString("questionTitle");
-                    String text = results.getString("questionText");
-                    Date date=results.getDate("creationDate");
-                    Question q = new Question();
-                    q.setQuestionID(qid);
-                    q.setQuestionTitle(title);
-                    q.setQuestionText(text);
-                    q.setCreationDate(date);
+                    long questionID = results.getLong(1);
+                    String questionTitle = results.getString(2);
+                    String questionText = results.getString(3);
+                    Date creationDate = results.getDate(4);
 
+                    Question q = new Question();
+                    q.setQuestionID(questionID);
+                    q.setQuestionTitle(questionTitle);
+                    q.setQuestionText(questionText);
+                    q.setCreationDate(creationDate);
                     questions.add(q);
                 }
+                LOG.debug("Results fetched" + results.getRow());
             }
         }
         catch (SQLException e)
@@ -222,114 +163,35 @@ public class QuestionService implements IQuestion {
         }
         finally
         {
-            if (null != callquery)
+            if (null != proc)
             {
                 LOG.info("calling cleanUp");
-                callquery.cleanup();
+                proc.cleanup();
             }
         }
-        return questions;   //returns the list of questions found
+        return questions;
     }
 
-   			ResultSet results = proc.executeWithResults();
-   			if (null != results)
-   			{
-   				while (results.next())
-   				{
-   					long questionID = results.getLong(1);
-   					String questionTitle = results.getString(2);
-   					String questionText = results.getString(3);
-   					Date creationDate = results.getDate(4);
-
-   					Question q = new Question();
-   					q.setQuestionID(questionID);
-   					q.setQuestionTitle(questionTitle);
-   					q.setQuestionText(questionText);
-   					q.setCreationDate(creationDate);
-   					questions.add(q);
-   				}
-   			}
-   		}
-   		catch (SQLException e)
-   		{
-   			// Logging needed.
-   		}
-   		finally
-   		{
-   			if (null != proc)
-   			{
-   				proc.cleanup();
-   			}
-   		}
-   		return questions;
-   	}
-
     @Override
-    public boolean deleteQuestionById(long id)
-    {
+    public boolean deleteQuestionById(long id) {
         LOG = SystemConfig.instance().getLOG();
         LOG.info("In deleteQuestionById method");
-
-        CallQuery callquery1 = null;
-        CallQuery callquery2 = null;
-
-        CallQuery callquery3 = null;
-        CallQuery callquery4 = null;
-
-        String query3=" DELETE FROM Question\r\n" +
-                "    WHERE Question.questionID = '"+id+"';";
-        String query1="DELETE FROM QuestionOption\r\n" +
-                "    WHERE QuestionOption.questionID = '"+id+"';";
-        String query2="DELETE FROM QuestionTypeMapper\r\n" +
-                "    WHERE QuestionTypeMapper.questionID = '"+id+"';";
-        String query4="DELETE FROM InstructorQuestionMapper\r\n" +
-                "    WHERE InstructorQuestionMapper.questionID = '"+id+"';";
-    public boolean deleteQuestionById(long id) {
         CallStoredProcedure callStoredProcedure = null;
         try{
+            LOG.info("Performing 4 queries");
             callStoredProcedure = new CallStoredProcedure("spDeleteQuestionById(?)");
             callStoredProcedure.setParameter(1, id);
 
             callStoredProcedure.execute();
         }catch (SQLException e){
-            e.printStackTrace();
-            LOG.info("Performing 4 queries");
-            callquery4 = new CallQuery(query4);
-            callquery4.executeUpdate(query4);
-
-            callquery2 = new CallQuery(query2);
-            callquery2.executeUpdate(query2);
-
-            callquery1 = new CallQuery(query1);
-            callquery1.executeUpdate(query1);
-
-            callquery3 = new CallQuery(query3);
-            System.out.println("query is="+query3);
-
-            callquery3.executeUpdate(query3);
-
-        }catch (SQLException e) {
             LOG.error("sql query exception", e);
+            e.printStackTrace();
             return false;
         }finally {
             if (null != callStoredProcedure)
             {
+                LOG.info("calling cleanUp");
                 callStoredProcedure.cleanup();
-            LOG.info("calling cleanUp");
-            if (null != callquery1) {
-                callquery1.cleanup();
-            }
-
-            if (null != callquery2) {
-                callquery2.cleanup();
-            }
-
-            if (null != callquery3) {
-                callquery3.cleanup();
-            }
-
-            if (null != callquery4) {
-                callquery4.cleanup();
             }
         }
         return true;
@@ -376,6 +238,8 @@ public class QuestionService implements IQuestion {
 		return ques;
 	}
 
+
+
     @Override
     public List<Question> loadInstructorQuestionsList(long courseID)
 	{
@@ -420,9 +284,7 @@ public class QuestionService implements IQuestion {
 		return questions;
 	}
 
-
-
-//Load all question ID's linked to a survey
+    //Load all question ID's linked to a survey
     public List<Long> loadQuestionIDbySurveyID(long SurveyID) {
 
         List<Long> questions = new ArrayList<Long>();
@@ -455,9 +317,6 @@ public class QuestionService implements IQuestion {
         }
         return questions;
     }
-
-
-
 
     public Question loadQuestionbyID(long id)
     {
@@ -492,6 +351,5 @@ public class QuestionService implements IQuestion {
             }
         }
         return q;
-
     }
 }

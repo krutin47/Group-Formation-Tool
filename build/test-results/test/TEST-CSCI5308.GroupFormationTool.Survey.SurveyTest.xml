@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CSCI5308.GroupFormationTool.Survey.SurveyTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2020-07-17T02:47:05" hostname="Camp_Nou" time="0.004">
+<testsuite name="CSCI5308.GroupFormationTool.Survey.SurveyTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2020-07-17T03:33:01" hostname="DESKTOP-U6HMV4A" time="0.002">
   <properties/>
-  <testcase name="getSId()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.001"/>
+  <testcase name="getSId()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.0"/>
   <testcase name="setSId()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.0"/>
   <testcase name="setIsPublished()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.0"/>
   <testcase name="setSTitle()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.0"/>
