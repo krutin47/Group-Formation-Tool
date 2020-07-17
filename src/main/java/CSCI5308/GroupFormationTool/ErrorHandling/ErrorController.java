@@ -12,4 +12,10 @@ public class ErrorController
 	{
 		return "error";
 	}
+
+	@GetMapping("/404")
+	public String error404(Model model)
+	{
+		return "404";
+	}
 }

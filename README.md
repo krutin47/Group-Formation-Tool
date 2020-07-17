@@ -1,13 +1,13 @@
 # Group 5
 
-##Test Server Link
+### Test Server Link
 https://csci-5308-group-5-test.herokuapp.com/
 
-##Production Server Link
+### Production Server Link
 https://csci-5308-group-5-production.herokuapp.com/
 
 ## Authors
-Chetanpreet Singh Sachdeva
-Japnoor Kaur
-Krutin Trivedi
-Rudra Makwana
+* Chetanpreet Singh Sachdeva
+* Japnoor Kaur
+* Krutin Trivedi
+* Rudra Makwana

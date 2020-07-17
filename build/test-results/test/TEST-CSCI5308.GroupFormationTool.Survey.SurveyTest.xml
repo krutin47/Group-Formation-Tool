@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CSCI5308.GroupFormationTool.Survey.SurveyTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2020-07-17T04:20:12" hostname="DESKTOP-U6HMV4A" time="0.002">
+  <properties/>
+  <testcase name="getSId()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.0"/>
+  <testcase name="setSId()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.0"/>
+  <testcase name="setIsPublished()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.001"/>
+  <testcase name="setSTitle()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.0"/>
+  <testcase name="getSTitle()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.001"/>
+  <testcase name="getIsPublished()" classname="CSCI5308.GroupFormationTool.Survey.SurveyTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

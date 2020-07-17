@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Check if Survey Exists</title>
+</head>
+<body>
+<div><a href="/">Go to Home Page</a></div>
+<div style="margin-top:40px; margin-left: 10px; position:relative;" align="left">
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+</div>
+
+<h1 th:text="'Check Surveys for your Courses: '">Error loading Survey page. Try again later!</h1>
+
+<table>
+    <tr th:if="${courses.empty}">
+        <td colspan="2">No courses registered!</td>
+    </tr>
+    <tr th:each="course: ${courses}">
+        <td><a th:href="@{/survey/course(id=${course.id})}" th:text="${course.title}">Title</a></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

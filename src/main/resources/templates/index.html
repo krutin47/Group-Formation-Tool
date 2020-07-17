@@ -37,6 +37,13 @@
 				</a>
 			</div>
 
+
+			<div sec:authorize="isAuthenticated()">
+				<br/>
+				<a th:href="@{/survey/checksurvey}">Check for Surveys!</a>
+			</div>
+
+
 			<div class="mainGridRow" sec:authorize="isAuthenticated()">
 				<!-- Display list of courses. -->
 				<!-- Learned how to do this here: https://www.baeldung.com/thymeleaf-list -->
@@ -47,14 +54,18 @@
 					</tr>
 				</table>
 			</div>
+
+
 			<div class="mainGridCentreCard" sec:authorize="!isAuthenticated()">
 				<!-- Send them to login. -->
 				<p>This site requires you to be logged in.</p>
 			</div>
 			<a class="signupLogin mainGridRow mainGridCentreCard" sec:authorize="!isAuthenticated()" th:href="@{/login}">Click here to log in!</a>
 		</main>
+
 		<footer class="bodyGridRow footerGridContainer">
 			<p><strong>CSCI5308 (Advanced Topics in Software Development)</strong> is a graduate course offered for students enrolled in the <a href="https://www.dal.ca/macs" target="_blank">Master of Applied Computer Science (MACS)</a> at the <a href="https://www.dal.ca/cs" target="_blank">Faculty of Computer Science</a>, <a href="https://www.dal.ca" target="_blank">Dalhousie University</a>.</p>
 		</footer>
+
 	</body>
 </html>

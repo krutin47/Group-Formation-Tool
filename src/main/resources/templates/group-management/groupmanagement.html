@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <title>CSCI5308 - Group Formation Tool</title>
+</head>
+<body>
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+
+    <h3 th:text="'Group Formation Configuration: ' + ${course.title}">Configuration Page</h3>
+
+
+    <div><a href="/">Go to Home Page</a></div>
+
+    <div style="margin-top:40px; margib-left: 10px; position:relative;" align="center" sec:authorize="isAuthenticated()">
+        <form role="form" method="post" id="group" th:action="@{/group/creategroups}">
+            <input name="courseID" th:value="${course.id}" style="visibility: hidden">
+            <p>Group Size:
+                <select id="size" name="groupSize">
+                    <option th:value="2">2</option>
+                    <option th:value="3">3</option>
+                    <option th:value="4">4</option>
+                    <option th:value="5">5</option>
+                </select>
+            </p>
+            <input type="submit" value="Create Group"
+                   id="formedGroup"
+                   style="margin-top: 10px; text-align: center; height: 36px; width: 150px">
+        </form>
+    </div>
+</body>
+</html>

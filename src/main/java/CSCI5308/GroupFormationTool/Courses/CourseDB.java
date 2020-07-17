@@ -75,7 +75,89 @@ public class CourseDB implements ICoursePersistence
 			}
 		}
 	}
-	
+
+
+
+	//Returns list of courses based on a userID
+	public List<Course> loadCoursebyUser(long uid)
+	{
+		List<Course> courses = new ArrayList<Course>();
+		CallStoredProcedure proc = null;
+		try
+		{
+			proc = new CallStoredProcedure("spLoadCourseByUserID(?)");
+			proc.setParameter(1, uid);
+			ResultSet results = proc.executeWithResults();
+			if (null != results)
+			{
+				while (results.next())
+				{
+					String title = results.getString("title");
+					long id=results.getLong("id");
+					Course c = new Course();
+					c.setId(id);
+					c.setTitle(title);
+					courses.add(c);
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			// Logging needed.
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return courses;
+	}
+
+
+    //Check survey published or not using courseID
+	public boolean checkCourseSurvey(long id)
+	{
+		CallStoredProcedure proc = null;
+		String s=new String();
+		try
+		{
+			proc = new CallStoredProcedure("spCheckSurveyPublished(?)");
+			proc.setParameter(1, id);
+			ResultSet results = proc.executeWithResults();
+			if (null != results)
+			{
+				while(results.next())
+				{
+					s = results.getString("isPublished");
+				}
+			}
+
+			if(s.equalsIgnoreCase("y")||s.equalsIgnoreCase("Y"))
+			{
+				return true;
+			}
+		}
+		catch (SQLException e)
+		{
+			// Logging needed.
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return false;
+
+	}
+
+
+
+
+
 	public boolean createCourse(Course course)
 	{
 		CallStoredProcedure proc = null;
@@ -100,7 +182,8 @@ public class CourseDB implements ICoursePersistence
 		}
 		return true;
 	}
-	
+
+
 	public boolean deleteCourse(long id)
 	{
 		CallStoredProcedure proc = null;

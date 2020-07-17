@@ -60,5 +60,10 @@
 		<div th:if="${displaylink}">
 			<a th:href="@{/question/questionmanager}">Question Manager Page</a>
 		</div>
+		<div th:if="${displaysurvey}">
+			<a th:href="@{/course/survey(id=${course.id})}">Create Survey</a>
+		<div>
+			<a th:href="@{/survey/groupformation(cid=${course.id})}">Group Formation Page</a>
+		</div>
 	</body>
 </html>

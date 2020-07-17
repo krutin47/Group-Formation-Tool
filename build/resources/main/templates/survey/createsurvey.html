@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <title>CSCI5308 - Group Formation Tool</title>
+</head>
+<body>
+<!-- I got the idea for how to do this from https://www.thymeleaf.org/doc/articles/springsecurity.html -->
+<div sec:authorize="isAuthenticated()">
+    <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+
+<h1 th:text="'Survey Manager Page: '">Survey Manager Page: Title Not Found</h1>
+<br/>
+
+<div sec:authorize="isAuthenticated()">
+</div>
+         <label> Add questions to your survey:</label>
+         <br/>
+         <br/>
+<form th:action="@{/course/survey/surveywelcomepage/createsurvey/display/addques(id=${id})}">
+ 
+         <label>Choose Questions from instructor's question bank</label>
+         
+            <select name="id" id="questionTitle">
+                <option th:each="question : ${questions}"
+                        th:value="${question.questionID}" th:text="${question.questionTitle}">
+                </option>                
+            </select>
+                              
+             <button type="submit" onClick= "getValue();">Add</button>
+                              <br/>
+             
+             <label>(Note: Questions already saved in survey won't be added again)</label>
+ <br/> 
+  <br/>
+  <table  border="1" style="width:300px">
+        <tr>
+            <th>Question Id</th>
+            <th>Question Title</th>
+            <th>Date Created</th>
+        </tr>
+
+        <tr th:each="addition : ${additions}">
+            <td th:text="${addition.questionID}"></td>
+            <td th:text="${addition.questionTitle}"></td>
+            <td th:text="${addition.creationDate}"></td>
+            
+        </tr>
+    </table>
+                <br/>
+   
+    </form>
+                    <br/>
+    
+    <label>Questions Saved for Survey:</label>
+                    <br/>
+                    <br/>
+    
+    <table  border="1" style="width:300px">
+        <tr>
+            <th>Question Id</th>
+            <th>Question Title</th>
+            <th>Question Text</th>
+            <th>Delete Question</th>              
+        </tr>
+<tr th:each="question : ${surveyQuestion}">
+            <td th:text="${question.questionID}"></td>
+            <td th:text="${question.questionTitle}"></td>
+            <td th:text="${question.questionText}"></td>
+            <td><a th:href="@{/course/survey/surveywelcomepage/createsurvey/display/delete(id=${question.questionID})}">Delete</a></td> 
+        </tr>
+       
+    </table>
+    
+                     
+    <form th:action="@{/course/survey/surveywelcomepage/createsurvey/display/addques/save}">
+                    <br/>
+    
+                 <button type="submit">Save Questions</button>
+    
+    </form>
+     <form th:action="@{/course/survey/surveywelcomepage/createsurvey/display/addques/publish}">
+                    <br/>
+    
+                 <button type="submit">Publish Survey</button>
+    
+    </form>
+<br/>
+   
+<p>
+</p>
+</body>
+</html>

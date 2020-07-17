@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div><a href="/">Go to Home Page</a></div>
+<div style="margin-top:40px; margin-left: 10px; position:relative;" align="left">
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+</div>
+<h1>Survey Exists</h1>
+<!--serveyID-->
+<!--Action pass surway ID in the action Link -->
+<form th:action="" method="post">
+<!--  iterate through questions  -->
+</form>
+
+<table  border="1" style="width:300px">
+    <tr>
+        <th>Question Title</th>
+        <th>Question Text</th>
+        <th>Answer</th>
+    </tr>
+
+    <tr th:each="question : ${questions}">
+        <td th:text="${question.questionTitle}"></td>
+        <td th:text="${question.questionText}"></td>
+
+        <div th:if="${displayNum}">
+           <td>
+               <form th:action="@{/survey/survey/addAnswerNumber(id=${question.questionID})}" method="post">
+                   <div><label> Enter Number: <input type="text" name="answer"/> </label></div>
+               </form>
+           </td>
+        </div>
+
+        <div th:if="${displayMul1}">
+            <td>
+                <form th:action="@{/survey/survey/addAnswerMul1(id=${question.questionID})}" method="post">
+                    <div><label> Enter Answer: <input type="dropdown" name="answer"/> </label></div>
+                </form>
+            </td>
+        </div>
+        <div th:if="${displayMul2}">
+            <td>
+                <form th:action="@{/survey/survey/addAnswerMul2(id=${question.questionID})}" method="post">
+                    <div><label> Enter Answer: <input type="checkbox" name="answer"/> </label></div>
+                </form>
+            </td>
+        </div>
+        <div th:if="${displayFree}">
+            <td>
+                <form th:action="@{/survey/survey/addAnswerFree(id=${question.questionID})}" method="post">
+                    <div><label> Enter Text: <input type="text" name="answer"/> </label></div>
+                </form>
+            </td>
+        </div>
+    </tr>
+
+
+
+</table>
+    <button type="submit">Submit</button>
+
+</form>
+</body>
+</html>
