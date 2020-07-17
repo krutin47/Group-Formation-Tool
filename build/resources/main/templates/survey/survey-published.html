@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <title>CSCI5308 - Group Formation Tool</title>
+</head>
+<body>
+<!-- I got the idea for how to do this from https://www.thymeleaf.org/doc/articles/springsecurity.html -->
+<div sec:authorize="isAuthenticated()">
+    <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+<h1 th:text="'Survey Manager Page: '">Survey Manager Page: Title Not Found</h1>
+<br/>
+
+<div sec:authorize="isAuthenticated()">
+</div>
+                    <br/>
+                 <label>Your Survey is Published!</label>
+    <br/>
+    <br/>
+
+    <table  border="1" style="width:300px">
+        <tr>
+            <th>Question Id</th>
+            <th>Question Title</th>
+            <th>Question Text</th>
+        </tr>
+<tr th:each="question : ${surveyQuestion}">
+            <td th:text="${question.questionID}"></td>
+            <td th:text="${question.questionTitle}"></td>
+            <td th:text="${question.questionText}"></td>          
+        </tr>      
+    </table>
+
+<br/>   
+<p>
+</p>
+</body>
+</html>
