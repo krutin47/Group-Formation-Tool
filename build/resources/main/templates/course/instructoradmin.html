@@ -57,5 +57,11 @@
 		</form>
         <br/>
 		<a th:href="@{/course/enrollta(id=${course.id})}">Enroll TAs</a>
+		<div th:if="${displaylink}">
+			<a th:href="@{/question/questionmanager}">Question Manager Page</a>
+		</div>
+		<div>
+			<a th:href="@{/survey/groupformation(cid=${course.id})}">Group Formation Page</a>
+		</div>
 	</body>
 </html>

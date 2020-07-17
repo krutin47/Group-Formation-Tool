@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.081s</div>
+<div class="counter">0.083s</div>
 <p>duration</p>
 </div>
 </td>
@@ -84,12 +84,12 @@
 </tr>
 <tr>
 <td class="success">loadAllRoluesForUserInCourse()</td>
-<td class="success">0.002s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">userHasRoleInCourse()</td>
-<td class="success">0.076s</td>
+<td class="success">0.077s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -97,12 +97,12 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2020-06-18 22:48:40.981  INFO 14380 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [CSCI5308.GroupFormationTool.CoursesTest.CourseUserRelationshipTest], using SpringBootContextLoader
-2020-06-18 22:48:40.982  INFO 14380 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [CSCI5308.GroupFormationTool.CoursesTest.CourseUserRelationshipTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2020-06-18 22:48:40.982  INFO 14380 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [CSCI5308.GroupFormationTool.CoursesTest.CourseUserRelationshipTest]: CourseUserRelationshipTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2020-06-18 22:48:40.984  INFO 14380 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration CSCI5308.GroupFormationTool.GroupFormationToolApplication for test class CSCI5308.GroupFormationTool.CoursesTest.CourseUserRelationshipTest
-2020-06-18 22:48:40.986  INFO 14380 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-2020-06-18 22:48:40.988  INFO 14380 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@9087abf, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@380c020e, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@35403bb7, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@2656a4e1, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6c41ff16, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@34858ce2, org.springframework.test.context.event.EventPublishingTestExecutionListener@2c9446, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@13ce490e, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@7094ad2e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@686edd42, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@c84faad, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6de3440a, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@38cb7945]
+<pre>2020-07-16 22:35:01.463  INFO 16504 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [CSCI5308.GroupFormationTool.CoursesTest.CourseUserRelationshipTest], using SpringBootContextLoader
+2020-07-16 22:35:01.464  INFO 16504 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [CSCI5308.GroupFormationTool.CoursesTest.CourseUserRelationshipTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2020-07-16 22:35:01.464  INFO 16504 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [CSCI5308.GroupFormationTool.CoursesTest.CourseUserRelationshipTest]: CourseUserRelationshipTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2020-07-16 22:35:01.467  INFO 16504 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration CSCI5308.GroupFormationTool.GroupFormationToolApplication for test class CSCI5308.GroupFormationTool.CoursesTest.CourseUserRelationshipTest
+2020-07-16 22:35:01.469  INFO 16504 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2020-07-16 22:35:01.474  INFO 16504 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6e40c088, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5b588613, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@38f4462c, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@59dd0acb, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3171c5f8, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@2e06a5db, org.springframework.test.context.event.EventPublishingTestExecutionListener@34595311, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@5638c03, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@3a02c752, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@21b185b4, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5f8e9b48, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@4614172e, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6a8070e9]
 </pre>
 </span>
 </div>
@@ -114,7 +114,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 6.0.1</a> at 18-Jun-2020 10:48:41 PM</p>
+<a href="http://www.gradle.org">Gradle 6.0.1</a> at 16-Jul-2020 10:35:03 PM</p>
 </div>
 </div>
 </body>

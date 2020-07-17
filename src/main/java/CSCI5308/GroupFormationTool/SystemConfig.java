@@ -1,5 +1,11 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.Answers.AnswerDB;
+import CSCI5308.GroupFormationTool.Answers.AnswerStudentDB;
+import CSCI5308.GroupFormationTool.Answers.IAnswer;
+import CSCI5308.GroupFormationTool.Answers.IAnswerStudentMapperDB;
+import CSCI5308.GroupFormationTool.GroupFormationManagement.GroupFormation;
+import CSCI5308.GroupFormationTool.GroupFormationManagement.IGroupFormation;
 import CSCI5308.GroupFormationTool.Questions.IQuestion;
 import CSCI5308.GroupFormationTool.Questions.IQuestionType;
 import CSCI5308.GroupFormationTool.Questions.QuestionService;
@@ -8,6 +14,8 @@ import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.Courses.*;
+import CSCI5308.GroupFormationTool.SurveyRudra.ISurveyPersistence;
+import CSCI5308.GroupFormationTool.SurveyRudra.SurveyDB;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,6 +42,10 @@ public class SystemConfig
 	private IQuestionType questionTypeService;
 	private Properties properties;
 	private IPasswordPolicies passwordPolicies;
+	private IGroupFormation groupFormation;
+	private ISurveyPersistence surveyPersistence;
+	private IAnswer answer;
+	private IAnswerStudentMapperDB studentMapperDB;
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -51,6 +63,10 @@ public class SystemConfig
 		questionTypeService = new QuestionTypeService();
 		passwordPolicies = new DefaultPasswordPolicies();
 		properties = new Properties();
+		groupFormation = new GroupFormation();
+		surveyPersistence = new SurveyDB();
+		answer = new AnswerDB();
+		studentMapperDB = new AnswerStudentDB();
 		String propertyFilePath = "src/main/resources/application.properties";
 		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
 			properties.load(in);
@@ -152,5 +168,37 @@ public class SystemConfig
 
 	public void setQuestionTypeService(IQuestionType questionTypeService) {
 		this.questionTypeService = questionTypeService;
+	}
+
+	public IGroupFormation getGroupFormation() {
+		return groupFormation;
+	}
+
+	public void setGroupFormation(IGroupFormation groupFormation) {
+		this.groupFormation = groupFormation;
+	}
+
+	public ISurveyPersistence getSurveyPersistence() {
+		return surveyPersistence;
+	}
+
+	public void setSurveyPersistence(ISurveyPersistence surveyPersistence) {
+		this.surveyPersistence = surveyPersistence;
+	}
+
+	public IAnswer getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(IAnswer answer) {
+		this.answer = answer;
+	}
+
+	public IAnswerStudentMapperDB getStudentMapperDB() {
+		return studentMapperDB;
+	}
+
+	public void setStudentMapperDB(IAnswerStudentMapperDB studentMapperDB) {
+		this.studentMapperDB = studentMapperDB;
 	}
 }
