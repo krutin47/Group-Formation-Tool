@@ -61,8 +61,6 @@ public class SystemConfig
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
 	private IUserNotifications userNotifications;
-	private IPasswordEncryption passwordEncryption;
-	private IUserPersistence userDB;
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
@@ -269,6 +267,8 @@ public class SystemConfig
 
 	public void setSurveyDB(ISurveyDB surveyDB) {
 		this.surveyDB = surveyDB;
+	}
+
 	public IGroupFormation getGroupFormation() {
 		return groupFormation;
 	}

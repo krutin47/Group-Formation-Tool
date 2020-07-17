@@ -28,4 +28,19 @@ public class AnswerDBTest implements IAnswer {
         ans.setAnswerID(ID);
         return ans.getAnswerValue();
     }
+
+    @Override
+    public long getSurveyIDByCourseID(long courseID) {
+        return 0;
+    }
+
+    @Override
+    public List<Long> loadListUserAnswered(long surveyID) {
+        return null;
+    }
+
+    @Override
+    public List<Answer> loadAnswersByUserID(long userID) {
+        return null;
+    }
 }

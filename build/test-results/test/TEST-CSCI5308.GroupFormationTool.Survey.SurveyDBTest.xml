@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2020-07-17T03:33:01" hostname="DESKTOP-U6HMV4A" time="0.013">
+<testsuite name="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2020-07-17T04:20:12" hostname="DESKTOP-U6HMV4A" time="0.009">
   <properties/>
-  <testcase name="loadSurveyIdbyCourseID()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.001"/>
-  <testcase name="deleteSurveyQuestion()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.001"/>
+  <testcase name="loadSurveyIdbyCourseID()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.0"/>
+  <testcase name="deleteSurveyQuestion()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.0"/>
   <testcase name="loadQuestionBySurveyID()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.001"/>
-  <testcase name="checkifQuestionInSurveyExists()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.001"/>
-  <testcase name="saveQuestionInSurvey()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.001"/>
+  <testcase name="checkifQuestionInSurveyExists()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.0"/>
+  <testcase name="saveQuestionInSurvey()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.0"/>
   <testcase name="checkSurveyIsPublished()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.001"/>
   <testcase name="createSurvey()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.002"/>
   <testcase name="checkSurveyExists()" classname="CSCI5308.GroupFormationTool.Survey.SurveyDBTest" time="0.0"/>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2020-07-17T03:32:59" hostname="DESKTOP-U6HMV4A" time="0.363">
+<testsuite name="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2020-07-17T04:20:11" hostname="DESKTOP-U6HMV4A" time="0.358">
   <properties/>
-  <testcase name="isEmailValidTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.285"/>
+  <testcase name="isEmailValidTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.261"/>
   <testcase name="getFirstNameTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
-  <testcase name="setLastNameTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.003"/>
-  <testcase name="isBannerIDValidTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.002"/>
-  <testcase name="setBannerIDTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.006"/>
-  <testcase name="ConstructorTests()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
-  <testcase name="setEmailTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.002"/>
-  <testcase name="isFirstNameValidTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.003"/>
-  <testcase name="setIDTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.003"/>
-  <testcase name="getIDTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.003"/>
-  <testcase name="setFirstNameTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.007"/>
+  <testcase name="setLastNameTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.008"/>
+  <testcase name="isBannerIDValidTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.006"/>
+  <testcase name="setBannerIDTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.005"/>
+  <testcase name="ConstructorTests()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.005"/>
+  <testcase name="setEmailTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.006"/>
+  <testcase name="isFirstNameValidTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
+  <testcase name="setIDTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
+  <testcase name="getIDTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
+  <testcase name="setFirstNameTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
   <testcase name="createUser()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
-  <testcase name="isLastNameValidTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
-  <testcase name="getLastNameTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.006"/>
-  <testcase name="getBannerIDTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
-  <testcase name="getEmailTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.006"/>
+  <testcase name="isLastNameValidTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.003"/>
+  <testcase name="getLastNameTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
+  <testcase name="getBannerIDTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.005"/>
+  <testcase name="getEmailTest()" classname="CSCI5308.GroupFormationTool.AccessControlTest.UserTest" time="0.004"/>
   <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -24,36 +24,36 @@
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
-?[32m :: Spring Boot :: ?[39m      ?[2m (v2.2.4.RELEASE)?[0;39m
+?[32m :: Spring Boot :: ?[39m      ?[2m (v2.2.7.RELEASE)?[0;39m
 
-2020-07-17 00:32:56.613 [THREAD -- Test worker] [CLASS -- o.s.b.StartupInfoLogger] INFO  CSCI5308.GroupFormationTool.AccessControlTest.UserTest - Starting UserTest on DESKTOP-U6HMV4A with PID 18376 (started by Krutin_trivedi in D:\DAL\Summer_2020\Adv_SDC__CSCI_5308\group5)
-2020-07-17 00:32:56.651 [THREAD -- Test worker] [CLASS -- o.s.b.SpringApplication] INFO  CSCI5308.GroupFormationTool.AccessControlTest.UserTest - No active profile set, falling back to default profiles: default
-2020-07-17 00:32:56.706 [THREAD -- Test worker] [CLASS -- o.s.c.s.AbstractApplicationContext] DEBUG org.springframework.web.context.support.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@2c9e99ad
-2020-07-17 00:32:58.177 [THREAD -- Test worker] [CLASS -- o.s.s.w.DefaultSecurityFilterChain] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/resources/**'], []
-2020-07-17 00:32:58.295 [THREAD -- Test worker] [CLASS -- o.s.s.w.DefaultSecurityFilterChain] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@43a59b21, org.springframework.security.web.context.SecurityContextPersistenceFilter@4586eb18, org.springframework.security.web.header.HeaderWriterFilter@6e5b8d71, org.springframework.security.web.csrf.CsrfFilter@a67d4ca, org.springframework.security.web.authentication.logout.LogoutFilter@6402d45, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1cebbf38, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ac27199, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5c72df21, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@176d279a, org.springframework.security.web.session.SessionManagementFilter@33c61df8, org.springframework.security.web.access.ExceptionTranslationFilter@67df8f85, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1c14ac8]
-2020-07-17 00:32:58.813 [THREAD -- Test worker] [CLASS -- o.s.s.c.ExecutorConfigurationSupport] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
-2020-07-17 00:32:58.831 [THREAD -- Test worker] [CLASS -- o.s.w.s.m.m.a.RequestMappingHandlerAdapter] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2020-07-17 00:32:58.927 [THREAD -- Test worker] [CLASS -- o.s.w.s.h.AbstractHandlerMethodMapping] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 44 mappings in 'requestMappingHandlerMapping'
-2020-07-17 00:32:58.932 [THREAD -- Test worker] [CLASS -- o.s.b.a.w.s.WelcomePageHandlerMapping] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
-2020-07-17 00:32:58.988 [THREAD -- Test worker] [CLASS -- o.s.w.s.h.SimpleUrlHandlerMapping] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2020-07-17 00:32:59.007 [THREAD -- Test worker] [CLASS -- o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2020-07-17 00:32:59.256 [THREAD -- Test worker] [CLASS -- o.s.b.StartupInfoLogger] INFO  CSCI5308.GroupFormationTool.AccessControlTest.UserTest - Started UserTest in 3.197 seconds (JVM running for 10.075)
-2020-07-17 00:32:59.552 [THREAD -- Test worker] [CLASS -- C.G.A.User] WARN  CSCI5308.GroupFormationTool.GroupFormationToolApplication - Email Address null
-2020-07-17 00:32:59.552 [THREAD -- Test worker] [CLASS -- C.G.A.User] WARN  CSCI5308.GroupFormationTool.GroupFormationToolApplication - Email Address null
-2020-07-17 00:32:59.566 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.571 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.578 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.583 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.584 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.584 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.588 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.596 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.600 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.605 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.612 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.621 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.629 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
-2020-07-17 00:32:59.638 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:08.777 [THREAD -- Test worker] [CLASS -- o.s.b.StartupInfoLogger] INFO  CSCI5308.GroupFormationTool.AccessControlTest.UserTest - Starting UserTest on DESKTOP-U6HMV4A with PID 22352 (started by Krutin_trivedi in D:\DAL\Summer_2020\Adv_SDC__CSCI_5308\group5)
+2020-07-17 01:20:08.814 [THREAD -- Test worker] [CLASS -- o.s.b.SpringApplication] INFO  CSCI5308.GroupFormationTool.AccessControlTest.UserTest - No active profile set, falling back to default profiles: default
+2020-07-17 01:20:08.858 [THREAD -- Test worker] [CLASS -- o.s.c.s.AbstractApplicationContext] DEBUG org.springframework.web.context.support.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@4c78a9ea
+2020-07-17 01:20:10.233 [THREAD -- Test worker] [CLASS -- o.s.s.w.DefaultSecurityFilterChain] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-17 01:20:10.362 [THREAD -- Test worker] [CLASS -- o.s.s.w.DefaultSecurityFilterChain] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@59fb244d, org.springframework.security.web.context.SecurityContextPersistenceFilter@57160b3f, org.springframework.security.web.header.HeaderWriterFilter@5ef231dd, org.springframework.security.web.csrf.CsrfFilter@46097bd, org.springframework.security.web.authentication.logout.LogoutFilter@41530051, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5f4011c3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7ed7d8d8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@586a8583, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3f530709, org.springframework.security.web.session.SessionManagementFilter@5ea1d14a, org.springframework.security.web.access.ExceptionTranslationFilter@3ce55c83, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@64e12ac9]
+2020-07-17 01:20:10.792 [THREAD -- Test worker] [CLASS -- o.s.s.c.ExecutorConfigurationSupport] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-17 01:20:10.813 [THREAD -- Test worker] [CLASS -- o.s.w.s.m.m.a.RequestMappingHandlerAdapter] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2020-07-17 01:20:10.938 [THREAD -- Test worker] [CLASS -- o.s.w.s.h.AbstractHandlerMethodMapping] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 46 mappings in 'requestMappingHandlerMapping'
+2020-07-17 01:20:10.944 [THREAD -- Test worker] [CLASS -- o.s.b.a.w.s.WelcomePageHandlerMapping] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2020-07-17 01:20:11.002 [THREAD -- Test worker] [CLASS -- o.s.w.s.h.SimpleUrlHandlerMapping] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2020-07-17 01:20:11.021 [THREAD -- Test worker] [CLASS -- o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2020-07-17 01:20:11.271 [THREAD -- Test worker] [CLASS -- o.s.b.StartupInfoLogger] INFO  CSCI5308.GroupFormationTool.AccessControlTest.UserTest - Started UserTest in 2.922 seconds (JVM running for 5.665)
+2020-07-17 01:20:11.544 [THREAD -- Test worker] [CLASS -- C.G.A.User] WARN  CSCI5308.GroupFormationTool.GroupFormationToolApplication - Email Address null
+2020-07-17 01:20:11.545 [THREAD -- Test worker] [CLASS -- C.G.A.User] WARN  CSCI5308.GroupFormationTool.GroupFormationToolApplication - Email Address null
+2020-07-17 01:20:11.559 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.565 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.583 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.590 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.591 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.591 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.598 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.611 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.615 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.621 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.626 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.638 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.643 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
+2020-07-17 01:20:11.649 [THREAD -- Test worker] [CLASS -- C.G.A.User] INFO  CSCI5308.GroupFormationTool.GroupFormationToolApplication - setting Defaults to User
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
