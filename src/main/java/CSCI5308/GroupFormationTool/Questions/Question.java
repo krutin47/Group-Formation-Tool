@@ -111,7 +111,6 @@ public class Question implements Comparable<Question>{
     //TO DELETE AN EXISTING QUESTION based on questionID
     public boolean deleteQuestion(IQuestion questionDB)
     {
-        // return questionDB.deleteQuestion(questionID);
         return questionDB.deleteQuestionById(questionID);
     }
 

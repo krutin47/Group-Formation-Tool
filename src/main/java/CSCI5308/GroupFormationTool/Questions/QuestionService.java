@@ -96,6 +96,14 @@ public class QuestionService implements IQuestion {
         try {
             LOG.info("Performing query");
             callquery = new CallQuery(query2);
+	public List<Question> loadQuestionByInstID(long id)
+	{
+		List<Question> questions = new ArrayList<Question>();
+		CallStoredProcedure proc = null;
+		try
+		{
+			proc = new CallStoredProcedure("sploadQuestionByInstID(?)");
+			proc.setParameter(1, id);
 
             ResultSet results = callquery.executeWithResults(query2);
             if (null != results)
@@ -130,8 +138,39 @@ public class QuestionService implements IQuestion {
         }
         return questions;   //returns the list of questions found
 
+			ResultSet results = proc.executeWithResults();
+			if (null != results)
+			{
+				while (results.next())
+				{
+					long questionID = results.getLong(1);
+					String questionTitle = results.getString(2);
+					String questionText = results.getString(3);
+					Date creationDate = results.getDate(4);
 
-    }
+					Question q = new Question();
+					q.setQuestionID(questionID);
+					q.setQuestionTitle(questionTitle);
+					q.setQuestionText(questionText);
+					q.setCreationDate(creationDate);
+					questions.add(q);
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			// Logging needed.
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return questions;
+	}
+
 
     @Override
     public List<Question> loadQuestionByQID(long id)
@@ -149,6 +188,14 @@ public class QuestionService implements IQuestion {
         {
             LOG.info("Performing query");
             callquery = new CallQuery(query2);
+   	public List<Question> loadQuestionByQID(long id)
+   	{
+   		List<Question> questions = new ArrayList<Question>();
+   		CallStoredProcedure proc = null;
+   		try
+   		{
+   			proc = new CallStoredProcedure("sploadQuestionByQuestionID(?)");
+   			proc.setParameter(1, id);
 
             ResultSet results = callquery.executeWithResults(query2);
             if (null != results)
@@ -183,6 +230,39 @@ public class QuestionService implements IQuestion {
         }
         return questions;   //returns the list of questions found
     }
+
+   			ResultSet results = proc.executeWithResults();
+   			if (null != results)
+   			{
+   				while (results.next())
+   				{
+   					long questionID = results.getLong(1);
+   					String questionTitle = results.getString(2);
+   					String questionText = results.getString(3);
+   					Date creationDate = results.getDate(4);
+
+   					Question q = new Question();
+   					q.setQuestionID(questionID);
+   					q.setQuestionTitle(questionTitle);
+   					q.setQuestionText(questionText);
+   					q.setCreationDate(creationDate);
+   					questions.add(q);
+   				}
+   			}
+   		}
+   		catch (SQLException e)
+   		{
+   			// Logging needed.
+   		}
+   		finally
+   		{
+   			if (null != proc)
+   			{
+   				proc.cleanup();
+   			}
+   		}
+   		return questions;
+   	}
 
     @Override
     public boolean deleteQuestionById(long id)
@@ -204,7 +284,15 @@ public class QuestionService implements IQuestion {
                 "    WHERE QuestionTypeMapper.questionID = '"+id+"';";
         String query4="DELETE FROM InstructorQuestionMapper\r\n" +
                 "    WHERE InstructorQuestionMapper.questionID = '"+id+"';";
+    public boolean deleteQuestionById(long id) {
+        CallStoredProcedure callStoredProcedure = null;
         try{
+            callStoredProcedure = new CallStoredProcedure("spDeleteQuestionById(?)");
+            callStoredProcedure.setParameter(1, id);
+
+            callStoredProcedure.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
             LOG.info("Performing 4 queries");
             callquery4 = new CallQuery(query4);
             callquery4.executeUpdate(query4);
@@ -224,6 +312,9 @@ public class QuestionService implements IQuestion {
             LOG.error("sql query exception", e);
             return false;
         }finally {
+            if (null != callStoredProcedure)
+            {
+                callStoredProcedure.cleanup();
             LOG.info("calling cleanUp");
             if (null != callquery1) {
                 callquery1.cleanup();
@@ -243,6 +334,92 @@ public class QuestionService implements IQuestion {
         }
         return true;
     }
+
+    @Override
+    public Question loadQuestionbyQid(long id)
+	{
+    Question ques=new Question();
+    CallStoredProcedure proc = null;
+		try
+		{
+			proc = new CallStoredProcedure("spLoadQuestionByQid(?)");
+			proc.setParameter(1, id);
+			ResultSet results = proc.executeWithResults();
+			if (null != results)
+			{
+				while (results.next())
+				{
+					long qid =results.getLong("questionID");
+                    String title = results.getString("questionTitle");
+                    String text = results.getString("questionText");
+                    Date date=results.getDate("creationDate");
+                    ques.setQuestionID(qid);
+                    ques.setQuestionTitle(title);
+                    ques.setQuestionText(text);
+                    ques.setCreationDate(date);
+
+				}
+			}
+
+		}
+		catch (SQLException e)
+		{
+			// Logging needed.
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return ques;
+	}
+
+    @Override
+    public List<Question> loadInstructorQuestionsList(long courseID)
+	{
+		List<Question> questions = new ArrayList<Question>();
+		CallStoredProcedure proc = null;
+		try
+		{
+			proc = new CallStoredProcedure("spLoadInstructorQuestionsList(?)");
+            proc.setParameter(1, courseID);
+
+			ResultSet results = proc.executeWithResults();
+			if (null != results)
+			{
+				while (results.next())
+				{
+					long questionID = results.getLong(1);
+					String questionTitle = results.getString(2);
+					String questionText = results.getString(3);
+					Date creationDate = results.getDate(4);
+
+					Question q = new Question();
+					q.setQuestionID(questionID);
+					q.setQuestionTitle(questionTitle);
+					q.setQuestionText(questionText);
+					q.setCreationDate(creationDate);
+
+					questions.add(q);
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			// Logging needed.
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return questions;
+	}
+
 
 
 //Load all question ID's linked to a survey

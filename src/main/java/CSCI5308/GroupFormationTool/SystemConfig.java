@@ -1,5 +1,14 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.Questions.IQuestion;
+import CSCI5308.GroupFormationTool.Questions.IQuestionType;
+import CSCI5308.GroupFormationTool.Questions.QuestionService;
+import CSCI5308.GroupFormationTool.Questions.QuestionTypeService;
+import CSCI5308.GroupFormationTool.Security.*;
+import CSCI5308.GroupFormationTool.AccessControl.*;
+import CSCI5308.GroupFormationTool.Database.*;
+import CSCI5308.GroupFormationTool.Courses.*;
+import CSCI5308.GroupFormationTool.Survey.*;
 import CSCI5308.GroupFormationTool.AccessControl.IUserNotifications;
 import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
 import CSCI5308.GroupFormationTool.AccessControl.UserDB;
@@ -51,6 +60,7 @@ public class SystemConfig
 	private IQuestionType questionTypeService;
 	private Properties properties;
 	private IPasswordPolicies passwordPolicies;
+	private ISurveyDB surveyDB;
 	private IEmail mailUtil;
 	private Logger LOG;
 
@@ -74,6 +84,8 @@ public class SystemConfig
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
 		questionService = new QuestionService();
 		questionTypeService = new QuestionTypeService();
+		surveyDB = new SurveyDB();
+		properties = new Properties();
 		passwordPolicies = new DefaultPasswordPolicies();
 
 		LOG = LoggerFactory.getLogger(GroupFormationToolApplication.class);
@@ -230,5 +242,12 @@ public class SystemConfig
 	public IChoice getChoice()
 	{
 		return this.choice;
+	}
+	public ISurveyDB getSurveyDB() {
+		return surveyDB;
+	}
+
+	public void setSurveyDB(ISurveyDB surveyDB) {
+		this.surveyDB = surveyDB;
 	}
 }

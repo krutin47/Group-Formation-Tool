@@ -15,50 +15,31 @@
         <input type="submit" value="Sign Out"/>
     </form>
 </div>
-<h1 th:text="'Questions Manager Page: '">Questions Manager Page: Title Not Found</h1>
-<br/>
-
+<h1 th:text="'Survey Manager Page: '">Survey Manager Page: Title Not Found</h1>
 <br/>
 
 <div sec:authorize="isAuthenticated()">
-    <br/>
-    <a th:href="@{/question/questioncreationpage}">Create questions</a>
 </div>
-<br/>
-
-<div th:if="${not #lists.isEmpty(questions)}">
-
-    <form th:action="@{/question/questionmanager/sortbydate}" >
-        <label>Sort Questions by Date:</label>
-        <button type="submit">Sort By Date</button>
-    </form>
+                    <br/>
+                 <label>Your Survey is Published!</label>
     <br/>
-    <form th:action="@{/question/questionmanager/sortbytitle}" >
-
-        <label>Sort Questions by Title:</label>
-        <button  type="submit">Sort By Title</button>
-    </form>
     <br/>
+
     <table  border="1" style="width:300px">
         <tr>
             <th>Question Id</th>
             <th>Question Title</th>
-            <th>Date Created</th>
-            <th>Delete Question</th>
-
+            <th>Question Text</th>
         </tr>
-
-        <tr th:each="question : ${questions}">
+<tr th:each="question : ${surveyQuestion}">
             <td th:text="${question.questionID}"></td>
             <td th:text="${question.questionTitle}"></td>
-            <td th:text="${question.creationDate}"></td>
-            <td><a th:href="@{/question/questionmanager/deletequestion(id=${question.questionID})}">Delete</a></td>
-        </tr>
+            <td th:text="${question.questionText}"></td>          
+        </tr>      
     </table>
 
-</div>
+<br/>   
 <p>
-
 </p>
 </body>
 </html>

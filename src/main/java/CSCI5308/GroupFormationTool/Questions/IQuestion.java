@@ -16,5 +16,10 @@ public interface IQuestion {
 
     public boolean deleteQuestionById(long id);
 
+    public Question loadQuestionbyQid(long id);
+
+    public List<Question> loadInstructorQuestionsList(long courseID);
+
+
     public List<Long> loadQuestionIDbySurveyID(long SurveyID);
 }
