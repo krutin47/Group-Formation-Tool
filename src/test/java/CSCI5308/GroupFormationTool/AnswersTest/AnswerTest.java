@@ -54,3 +54,11 @@ public class AnswerTest {
 }
 
 
+    public void AnswerConstructorTest(){
+        Answer answer = new Answer();
+        assertTrue(answer.getQuestionID()==0);
+        assertTrue(answer.getAnswerID() == 0);
+        assertNull(answer.getAnswerValue());
+    }
+
+}

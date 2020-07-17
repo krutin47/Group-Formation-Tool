@@ -1,5 +1,11 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.Answers.AnswerDB;
+import CSCI5308.GroupFormationTool.Answers.AnswerStudentDB;
+import CSCI5308.GroupFormationTool.Answers.IAnswer;
+import CSCI5308.GroupFormationTool.Answers.IAnswerStudentMapperDB;
+import CSCI5308.GroupFormationTool.GroupFormationManagement.GroupFormation;
+import CSCI5308.GroupFormationTool.GroupFormationManagement.IGroupFormation;
 import CSCI5308.GroupFormationTool.Questions.IQuestion;
 import CSCI5308.GroupFormationTool.Questions.IQuestionType;
 import CSCI5308.GroupFormationTool.Questions.QuestionService;
@@ -32,6 +38,8 @@ import CSCI5308.GroupFormationTool.Utils.IEmail;
 import CSCI5308.GroupFormationTool.Utils.MailUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import CSCI5308.GroupFormationTool.Survey.ISurveyDB;
+import CSCI5308.GroupFormationTool.Survey.SurveyDB;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -53,6 +61,8 @@ public class SystemConfig
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
 	private IUserNotifications userNotifications;
+	private IPasswordEncryption passwordEncryption;
+	private IUserPersistence userDB;
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
@@ -68,6 +78,10 @@ public class SystemConfig
 	private IStudentSurvey studentSurvey;
 	private IChoice choice;
 
+	private IGroupFormation groupFormation;
+	private ISurveyDB surveyPersistence;
+	private IAnswer answer;
+	private IAnswerStudentMapperDB studentMapperDB;
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -94,6 +108,12 @@ public class SystemConfig
 		answerDB=new AnswerDB();
 		studentSurvey=new StudentSurveyDB();
 		choice=new ChoiceService();
+		passwordPolicies = new DefaultPasswordPolicies();
+		properties = new Properties();
+		groupFormation = new GroupFormation();
+		surveyPersistence = new SurveyDB();
+		answer = new AnswerDB();
+		studentMapperDB = new AnswerStudentDB();
 		String propertyFilePath = "src/main/resources/application.properties";
 		try(FileInputStream in = new FileInputStream(propertyFilePath)) {
 			properties.load(in);
@@ -249,5 +269,35 @@ public class SystemConfig
 
 	public void setSurveyDB(ISurveyDB surveyDB) {
 		this.surveyDB = surveyDB;
+	public IGroupFormation getGroupFormation() {
+		return groupFormation;
+	}
+
+	public void setGroupFormation(IGroupFormation groupFormation) {
+		this.groupFormation = groupFormation;
+	}
+
+	public ISurveyDB getSurveyPersistence() {
+		return surveyPersistence;
+	}
+
+	public void setSurveyPersistence(ISurveyDB surveyPersistence) {
+		this.surveyPersistence = surveyPersistence;
+	}
+
+	public IAnswer getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(IAnswer answer) {
+		this.answer = answer;
+	}
+
+	public IAnswerStudentMapperDB getStudentMapperDB() {
+		return studentMapperDB;
+	}
+
+	public void setStudentMapperDB(IAnswerStudentMapperDB studentMapperDB) {
+		this.studentMapperDB = studentMapperDB;
 	}
 }

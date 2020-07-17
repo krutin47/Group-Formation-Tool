@@ -49,7 +49,7 @@ public class InstructorAdminController
 
 			return "course/instructoradmin";
 		}
-		
+
 		else
 		{
 			return "logout";
@@ -101,7 +101,7 @@ public class InstructorAdminController
 			return "logout";
 		}
 	}
-	
+
 	@RequestMapping(value = "/course/uploadcsv", consumes = {"multipart/form-data"})
 	public ModelAndView upload(@RequestParam(name = FILE) MultipartFile file, @RequestParam(name = ID) long courseID)
 	{

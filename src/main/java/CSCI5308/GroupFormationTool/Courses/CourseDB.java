@@ -45,8 +45,6 @@ public class CourseDB implements ICoursePersistence
 		return courses;
 	}
 
-
-
 	public void loadCourseByID(long id, Course course)
 	{
 		CallStoredProcedure proc = null;
@@ -184,7 +182,6 @@ public class CourseDB implements ICoursePersistence
 		}
 		return true;
 	}
-
 
 
 	public boolean deleteCourse(long id)

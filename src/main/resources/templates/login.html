@@ -1,14 +1,14 @@
-<!DOCTYPE html>  
-<html xmlns:th="http://www.thymeleaf.org">  
-<head>  
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
 	<title>CSCI5308 Group Formation Tool - Login page</title>
-	<!-- Normalize.css by Nicolas Gallagher, used from https://necolas.github.io/normalize.css/ 
+	<!-- Normalize.css by Nicolas Gallagher, used from https://necolas.github.io/normalize.css/
 	Necessary to reset some default browser styles for consistent appearance across browsers. -->
 	<link th:href="@{/styles/cssandjs/normalize.css}" rel="stylesheet" />
 
 	<!-- This file includes all default styles for this application. -->
 	<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
-</head>  
+</head>
 <body class="bodyGridContainer">
 	<header class="bodyGridRow headerGridContainer">
 		<h1>CSCI5308 Group Formation Tool</h1>
@@ -26,9 +26,9 @@
 		</div>
 		<div class="mainGridCentreCard">
 			<form class="regnLoginGridContainer" th:action="@{/login}" method="post">
-				<label class="regnLoginGridLeftCol" for="lBannerInput"> Banner ID:</label> 
+				<label class="regnLoginGridLeftCol" for="lBannerInput"> Banner ID:</label>
 				<input id="lBannerInput" class="regnLoginGridRightCol" type="text" name="username"/>
-				<label class="regnLoginGridLeftCol" for="lPswdInput"> Password:</label> 
+				<label class="regnLoginGridLeftCol" for="lPswdInput"> Password:</label>
 				<input id="lPswdInput" class="regnLoginGridRightCol" type="password" name="password"/>
 				<input class="regnLoginGridRightCol" type="submit" value="Log In"/>
 			</form>
@@ -39,5 +39,5 @@
 	<footer class="bodyGridRow footerGridContainer">
 		<p><strong>CSCI5308 (Advanced Topics in Software Development)</strong> is a graduate course offered for students enrolled in the <a href="https://www.dal.ca/macs" target="_blank">Master of Applied Computer Science (MACS)</a> at the <a href="https://www.dal.ca/cs" target="_blank">Faculty of Computer Science</a>, <a href="https://www.dal.ca" target="_blank">Dalhousie University</a>.</p>
 </footer>
-</body>  
+</body>
 </html>

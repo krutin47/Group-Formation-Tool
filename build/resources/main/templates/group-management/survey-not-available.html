@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>No survey</title>
+</head>
+<body>
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <div>
+            <a href="/">Home Page</a>
+        </div>
+        <br/>
+        <br/>
+        <div>
+            <h3 th:text="'Survey is not available for ' + ${course.title}">
+                Survey is not available for this course.
+            </h3>
+        </div>
+    </div>
+</body>
+</html>

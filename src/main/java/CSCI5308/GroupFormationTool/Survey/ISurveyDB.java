@@ -14,4 +14,5 @@ public interface ISurveyDB {
 	public boolean publishSurvey(long surveyID);
 	public String checkSurveyIsPublished(long surveyID);
 	public boolean deleteSurveyQuestion(long questionID, long surveyID);
+    boolean isPublished(long courseID);
 }
