@@ -4,16 +4,17 @@ import CSCI5308.GroupFormationTool.AccessControl.IUserNotifications;
 import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
 import CSCI5308.GroupFormationTool.AccessControl.UserDB;
 import CSCI5308.GroupFormationTool.AccessControl.UserNotifications;
+import CSCI5308.GroupFormationTool.Answers.AnswerDB;
+import CSCI5308.GroupFormationTool.Answers.IAnswer;
+import CSCI5308.GroupFormationTool.Answers.IStudentSurvey;
+import CSCI5308.GroupFormationTool.Answers.StudentSurveyDB;
 import CSCI5308.GroupFormationTool.Courses.CourseDB;
 import CSCI5308.GroupFormationTool.Courses.CourseUserRelationshipDB;
 import CSCI5308.GroupFormationTool.Courses.ICoursePersistence;
 import CSCI5308.GroupFormationTool.Courses.ICourseUserRelationshipPersistence;
 import CSCI5308.GroupFormationTool.Database.DefaultDatabaseConfiguration;
 import CSCI5308.GroupFormationTool.Database.IDatabaseConfiguration;
-import CSCI5308.GroupFormationTool.Questions.IQuestion;
-import CSCI5308.GroupFormationTool.Questions.IQuestionType;
-import CSCI5308.GroupFormationTool.Questions.QuestionService;
-import CSCI5308.GroupFormationTool.Questions.QuestionTypeService;
+import CSCI5308.GroupFormationTool.Questions.*;
 import CSCI5308.GroupFormationTool.Security.BCryptPasswordEncryption;
 import CSCI5308.GroupFormationTool.Security.DefaultPasswordPolicies;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
@@ -22,15 +23,6 @@ import CSCI5308.GroupFormationTool.Utils.IEmail;
 import CSCI5308.GroupFormationTool.Utils.MailUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import CSCI5308.GroupFormationTool.Answers.AnswerDB;
-import CSCI5308.GroupFormationTool.Answers.IAnswer;
-import CSCI5308.GroupFormationTool.Answers.IStudentSurvey;
-import CSCI5308.GroupFormationTool.Answers.StudentSurveyDB;
-import CSCI5308.GroupFormationTool.Questions.*;
-import CSCI5308.GroupFormationTool.Security.*;
-import CSCI5308.GroupFormationTool.AccessControl.*;
-import CSCI5308.GroupFormationTool.Database.*;
-import CSCI5308.GroupFormationTool.Courses.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -217,7 +209,6 @@ public class SystemConfig
 	public void setLOG(Logger LOG) {
 		this.LOG = LOG;
 	}
-}
 
 	public IAnswer getAnswerDB()
 	{
@@ -240,3 +231,4 @@ public class SystemConfig
 	{
 		return this.choice;
 	}
+}
