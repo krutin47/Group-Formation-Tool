@@ -4,7 +4,7 @@ import CSCI5308.GroupFormationTool.Answers.AnswerStudentMapper;
 import CSCI5308.GroupFormationTool.Answers.IAnswerStudentMapperDB;
 import CSCI5308.GroupFormationTool.Courses.Course;
 import CSCI5308.GroupFormationTool.Courses.ICoursePersistence;
-import CSCI5308.GroupFormationTool.SurveyRudra.ISurveyPersistence;
+import CSCI5308.GroupFormationTool.Survey.ISurveyDB;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +17,7 @@ import java.util.List;
 public class GroupFormationController {
 
     public IGroupFormation iGroupFormation = SystemConfig.instance().getGroupFormation();
-    public ISurveyPersistence iSurveyPersistence = SystemConfig.instance().getSurveyPersistence();
+    public ISurveyDB iSurveyDB = SystemConfig.instance().getSurveyPersistence();
     public ICoursePersistence iCoursePersistence = SystemConfig.instance().getCourseDB();
     public IAnswerStudentMapperDB studentMapperDB = SystemConfig.instance().getStudentMapperDB();
 
@@ -26,7 +26,7 @@ public class GroupFormationController {
             @RequestParam(value = "cid") long id
     ){
         ModelAndView modelAndView = new ModelAndView();
-        boolean check = iSurveyPersistence.isPublished(id);
+        boolean check = iSurveyDB.isPublished(id);
         Course course = new Course();
         iCoursePersistence.loadCourseByID(id, course);
         if (check){

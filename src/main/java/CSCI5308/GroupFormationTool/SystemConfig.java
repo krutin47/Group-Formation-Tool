@@ -14,8 +14,8 @@ import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.Courses.*;
-import CSCI5308.GroupFormationTool.SurveyRudra.ISurveyPersistence;
-import CSCI5308.GroupFormationTool.SurveyRudra.SurveyDB;
+import CSCI5308.GroupFormationTool.Survey.ISurveyDB;
+import CSCI5308.GroupFormationTool.Survey.SurveyDB;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class SystemConfig
 	private Properties properties;
 	private IPasswordPolicies passwordPolicies;
 	private IGroupFormation groupFormation;
-	private ISurveyPersistence surveyPersistence;
+	private ISurveyDB surveyPersistence;
 	private IAnswer answer;
 	private IAnswerStudentMapperDB studentMapperDB;
 
@@ -178,11 +178,11 @@ public class SystemConfig
 		this.groupFormation = groupFormation;
 	}
 
-	public ISurveyPersistence getSurveyPersistence() {
+	public ISurveyDB getSurveyPersistence() {
 		return surveyPersistence;
 	}
 
-	public void setSurveyPersistence(ISurveyPersistence surveyPersistence) {
+	public void setSurveyPersistence(ISurveyDB surveyPersistence) {
 		this.surveyPersistence = surveyPersistence;
 	}
 
