@@ -7,7 +7,7 @@ https://csci-5308-group-5-test.herokuapp.com/
 https://csci-5308-group-5-production.herokuapp.com/
 
 ## Authors
-* Chetanpreet Singh Sachdeva
-* Japnoor Kaur
 * Krutin Trivedi
+* Japnoor Kaur
+* Chetanpreet Singh Sachdeva
 * Rudra Makwana
